@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+.tabla-container-clasif {
+    max-height: 520px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    background: white;
+}
+
+.tabla-clasificacion-tipos {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+}
+
+.tabla-clasificacion-tipos th {
+    background-color: #f8f9fa;
+    padding: 10px 8px;
+    border: 1px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-weight: 600;
+}
+
+.tabla-clasificacion-tipos td {
+    padding: 8px 6px;
+    border: 1px solid #dee2e6;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tabla-clasificacion-tipos th:nth-child(1),
+.tabla-clasificacion-tipos td:nth-child(1) {
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+    position: sticky;
+    left: 0;
+    background-color: white;
+    border-right: 2px solid #adb5bd;
+    text-align: left;
+    padding-left: 12px;
+    z-index: 5;
+}
+
+.tabla-clasificacion-tipos th:nth-child(1) {
+    background-color: #e9ecef;
+    z-index: 15;
+}
+
+.tabla-clasificacion-tipos th:nth-child(2),
+.tabla-clasificacion-tipos td:nth-child(2) {
+    width: 180px;
+    min-width: 180px;
+    max-width: 180px;
+    text-align: left;
+    padding-left: 12px;
+}
+
+.tabla-clasificacion-tipos tbody tr:hover {
+    background-color: #f8f9fa;
+}
+</style>
+
+</head>
+<body>
+<div class="tabla-container-clasif">
+<table border="1" class="dataframe tabla-clasificacion-tipos">
+  <thead>
+    <tr style="text-align: right;">
+      <th>EMPRESA</th>
+      <th>TIPO_ESTRUCTURAL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ACUICOLA CORDILLERA LTDA.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>ACUICOLA PUNTA VERGARA S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>ACUICOLA PUYUHUAPI S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>ACUICOLA TORNAGALEONES SPA</td>
+      <td>TIPO_II_BALANCEADO</td>
+    </tr>
+    <tr>
+      <td>AGRO ACUICOLA AYSEN S.A.</td>
+      <td>TIPO_III_ADAPTATIVO</td>
+    </tr>
+    <tr>
+      <td>AQUACHILE MAGALLANES SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>AQUACHILE MAULLIN LIMITADA</td>
+      <td>TIPO_II_BALANCEADO</td>
+    </tr>
+    <tr>
+      <td>AQUACHILE SPA</td>
+      <td>TIPO_II_BALANCEADO</td>
+    </tr>
+    <tr>
+      <td>AQUACULTIVOS S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>AQUAINNOVO SPA</td>
+      <td>TIPO_II_BALANCEADO</td>
+    </tr>
+    <tr>
+      <td>AUSTRALIS AGUA DULCE S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>AUSTRALIS MAR S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>CALETA BAY AGUA DULCE SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>CALETA BAY MAR SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>CERMAQ CHILE S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>COMERCIALIZADORA DE PRODUCTOS DEL MAR BATO SPA.</td>
+      <td>TIPO_II_BALANCEADO</td>
+    </tr>
+    <tr>
+      <td>COOKE AQUACULTURE CHILE S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>CULTIVOS MARINOS LINGUAR SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>CULTIVOS YADRAN S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>DELIFISH FARMING SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>EMPRESAS AQUACHILE S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>EXPORTADORA LOS FIORDOS LTDA.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>FIORDO AZUL S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>FIORDO BLANCO S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>FRIO SALMON SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>GANADERA DEL MAR DECIMA REGION S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>GLACIARES DOS S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>GRANJA MARINA TORNAGALEONES S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>INVERMAR S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>INVERSIONES DE DESARROLLO INMOBILIARIO S.A.</td>
+      <td>TIPO_II_BALANCEADO</td>
+    </tr>
+    <tr>
+      <td>MOWI CHILE S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>MULTI X S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>MULTIEXPORT PACIFIC FARMS S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>MULTIEXPORT PATAGONIA S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>NOVA AUSTRAL S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>NUEVA CERMAQ CHILE S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>PACIFIC SEAFOOD S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>PESQUERA YADRAN S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>PISCICULTURA PALQUI LTDA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>PISCICULTURAS PUERTO OCTAY S.A</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>PRIMAR S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>PROCESADORA CAILIN SPA</td>
+      <td>TIPO_III_ADAPTATIVO</td>
+    </tr>
+    <tr>
+      <td>PROCESADORA CALBUCO SPA</td>
+      <td>TIPO_III_ADAPTATIVO</td>
+    </tr>
+    <tr>
+      <td>PROCESADORA DE ALIMENTOS ASF SPA.</td>
+      <td>TIPO_III_ADAPTATIVO</td>
+    </tr>
+    <tr>
+      <td>PRODUCTOS DEL MAR VENTISQUEROS S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMOCONCESIONES S.A.</td>
+      <td>TIPO_III_ADAPTATIVO</td>
+    </tr>
+    <tr>
+      <td>SALMOCONCESIONES XI REGION S.A.</td>
+      <td>TIPO_III_ADAPTATIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES ALPEN LTDA.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES ANTARTICA S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES AYSEN S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES BLUMAR MAGALLANES SPA.</td>
+      <td>TIPO_II_BALANCEADO</td>
+    </tr>
+    <tr>
+      <td>SALMONES BLUMAR S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES CAMANCHACA S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES FRIOSUR S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES HUMBOLDT SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES ICE VAL LTDA.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES ISLAS DEL SUR LTDA.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES PACIFIC STAR S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES RELONCAVI SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SALMONES TECMAR S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SAYSEN I SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SAYSEN II SPA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SEA SALMON LTDA.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SOCIEDAD DE INVERSIONES EL MEMBRILLO LIMITADA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>SOCIEDAD DE INVERSIONES ISLA VICTORIA LTDA</td>
+      <td>TIPO_II_BALANCEADO</td>
+    </tr>
+    <tr>
+      <td>TRUSAL S.A.</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>UNIVERSIDAD DE ATACAMA</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>UNIVERSIDAD DE LOS LAGOS</td>
+      <td>TIPO_I_PRODUCTIVO</td>
+    </tr>
+    <tr>
+      <td>YADRAN CISNES S.A.</td>
+      <td>TIPO_II_BALANCEADO</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>

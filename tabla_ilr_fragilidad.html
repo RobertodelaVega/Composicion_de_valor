@@ -1,0 +1,427 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    margin: 0;
+    padding: 8px;
+    background: #ffffff;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    color: #000;
+  }
+
+  .tabla-contenedor {
+    height: 520px;
+    overflow: auto;
+    border: 1px solid #000;
+    background: #fff;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  th, td {
+    border: 1px solid #000;
+    padding: 4px 6px;
+    background: #fff;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 2;
+    font-weight: 600;
+  }
+
+  /* EMPRESA */
+  th:nth-child(1), td:nth-child(1) {
+    text-align: left;
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
+  }
+
+  /* columnas numéricas */
+  th:nth-child(2), td:nth-child(2),
+  th:nth-child(3), td:nth-child(3) {
+    width: 160px;
+    min-width: 160px;
+    max-width: 160px;
+  }
+</style>
+</head>
+<body>
+
+<div class="tabla-contenedor">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>EMPRESA</th>
+      <th>ILR_PROD_ADAPT</th>
+      <th>FRAGILIDAD_SUBCOMP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ACUICOLA CORDILLERA LTDA.</td>
+      <td>0.766758</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <td>ACUICOLA PUNTA VERGARA S.A.</td>
+      <td>0.504141</td>
+      <td>0.437500</td>
+    </tr>
+    <tr>
+      <td>ACUICOLA PUYUHUAPI S.A.</td>
+      <td>0.513656</td>
+      <td>0.333333</td>
+    </tr>
+    <tr>
+      <td>ACUICOLA TORNAGALEONES SPA</td>
+      <td>0.078357</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <td>AGRO ACUICOLA AYSEN S.A.</td>
+      <td>-5.519895</td>
+      <td>0.200000</td>
+    </tr>
+    <tr>
+      <td>AQUACHILE MAGALLANES SPA</td>
+      <td>8.450860</td>
+      <td>0.437500</td>
+    </tr>
+    <tr>
+      <td>AQUACHILE MAULLIN LIMITADA</td>
+      <td>0.068842</td>
+      <td>0.600000</td>
+    </tr>
+    <tr>
+      <td>AQUACHILE SPA</td>
+      <td>0.134645</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <td>AQUACULTIVOS S.A.</td>
+      <td>8.832575</td>
+      <td>0.600000</td>
+    </tr>
+    <tr>
+      <td>AQUAINNOVO SPA</td>
+      <td>-0.392474</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <td>AUSTRALIS AGUA DULCE S.A.</td>
+      <td>0.632754</td>
+      <td>0.272727</td>
+    </tr>
+    <tr>
+      <td>AUSTRALIS MAR S.A.</td>
+      <td>0.895847</td>
+      <td>0.350000</td>
+    </tr>
+    <tr>
+      <td>CALETA BAY AGUA DULCE SPA</td>
+      <td>2.395805</td>
+      <td>0.200000</td>
+    </tr>
+    <tr>
+      <td>CALETA BAY MAR SPA</td>
+      <td>0.753367</td>
+      <td>0.352941</td>
+    </tr>
+    <tr>
+      <td>CERMAQ CHILE S.A.</td>
+      <td>8.094774</td>
+      <td>0.466667</td>
+    </tr>
+    <tr>
+      <td>COMERCIALIZADORA DE PRODUCTOS DEL MAR BATO SPA.</td>
+      <td>-0.484699</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <td>COOKE AQUACULTURE CHILE S.A.</td>
+      <td>1.269272</td>
+      <td>0.588235</td>
+    </tr>
+    <tr>
+      <td>CULTIVOS MARINOS LINGUAR SPA</td>
+      <td>0.696495</td>
+      <td>0.461538</td>
+    </tr>
+    <tr>
+      <td>CULTIVOS YADRAN S.A.</td>
+      <td>0.736380</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <td>DELIFISH FARMING SPA</td>
+      <td>8.378895</td>
+      <td>0.384615</td>
+    </tr>
+    <tr>
+      <td>EMPRESAS AQUACHILE S.A.</td>
+      <td>8.966578</td>
+      <td>0.578947</td>
+    </tr>
+    <tr>
+      <td>EXPORTADORA LOS FIORDOS LTDA.</td>
+      <td>0.839365</td>
+      <td>0.571429</td>
+    </tr>
+    <tr>
+      <td>FIORDO AZUL S.A.</td>
+      <td>8.347876</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <td>FIORDO BLANCO S.A.</td>
+      <td>8.347876</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <td>FRIO SALMON SPA</td>
+      <td>1.023642</td>
+      <td>0.388889</td>
+    </tr>
+    <tr>
+      <td>GANADERA DEL MAR DECIMA REGION S.A.</td>
+      <td>8.507790</td>
+      <td>0.588235</td>
+    </tr>
+    <tr>
+      <td>GLACIARES DOS S.A.</td>
+      <td>1.014674</td>
+      <td>0.647059</td>
+    </tr>
+    <tr>
+      <td>GRANJA MARINA TORNAGALEONES S.A.</td>
+      <td>8.507790</td>
+      <td>0.588235</td>
+    </tr>
+    <tr>
+      <td>INVERMAR S.A.</td>
+      <td>1.466086</td>
+      <td>0.600000</td>
+    </tr>
+    <tr>
+      <td>INVERSIONES DE DESARROLLO INMOBILIARIO S.A.</td>
+      <td>0.134004</td>
+      <td>0.583333</td>
+    </tr>
+    <tr>
+      <td>MOWI CHILE S.A.</td>
+      <td>8.500261</td>
+      <td>0.529412</td>
+    </tr>
+    <tr>
+      <td>MULTI X S.A.</td>
+      <td>8.648315</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <td>MULTIEXPORT PACIFIC FARMS S.A.</td>
+      <td>8.886800</td>
+      <td>0.533333</td>
+    </tr>
+    <tr>
+      <td>MULTIEXPORT PATAGONIA S.A.</td>
+      <td>1.097651</td>
+      <td>0.533333</td>
+    </tr>
+    <tr>
+      <td>NOVA AUSTRAL S.A.</td>
+      <td>0.761573</td>
+      <td>0.571429</td>
+    </tr>
+    <tr>
+      <td>NUEVA CERMAQ CHILE S.A.</td>
+      <td>8.303447</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <td>PACIFIC SEAFOOD S.A.</td>
+      <td>8.347876</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <td>PESQUERA YADRAN S.A.</td>
+      <td>0.736380</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <td>PISCICULTURA PALQUI LTDA</td>
+      <td>3.071567</td>
+      <td>0.307692</td>
+    </tr>
+    <tr>
+      <td>PISCICULTURAS PUERTO OCTAY S.A</td>
+      <td>2.316592</td>
+      <td>0.181818</td>
+    </tr>
+    <tr>
+      <td>PRIMAR S.A.</td>
+      <td>0.883793</td>
+      <td>0.571429</td>
+    </tr>
+    <tr>
+      <td>PROCESADORA CAILIN SPA</td>
+      <td>-11.350600</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <td>PROCESADORA CALBUCO SPA</td>
+      <td>-5.836677</td>
+      <td>0.083333</td>
+    </tr>
+    <tr>
+      <td>PROCESADORA DE ALIMENTOS ASF SPA.</td>
+      <td>-5.502927</td>
+      <td>0.384615</td>
+    </tr>
+    <tr>
+      <td>PRODUCTOS DEL MAR VENTISQUEROS S.A.</td>
+      <td>8.451502</td>
+      <td>0.562500</td>
+    </tr>
+    <tr>
+      <td>SALMOCONCESIONES S.A.</td>
+      <td>-5.983979</td>
+      <td>0.200000</td>
+    </tr>
+    <tr>
+      <td>SALMOCONCESIONES XI REGION S.A.</td>
+      <td>-0.939268</td>
+      <td>0.333333</td>
+    </tr>
+    <tr>
+      <td>SALMONES ALPEN LTDA.</td>
+      <td>0.654258</td>
+      <td>0.384615</td>
+    </tr>
+    <tr>
+      <td>SALMONES ANTARTICA S.A.</td>
+      <td>8.456687</td>
+      <td>0.588235</td>
+    </tr>
+    <tr>
+      <td>SALMONES AYSEN S.A.</td>
+      <td>1.079836</td>
+      <td>0.642857</td>
+    </tr>
+    <tr>
+      <td>SALMONES BLUMAR MAGALLANES SPA.</td>
+      <td>0.281306</td>
+      <td>0.421053</td>
+    </tr>
+    <tr>
+      <td>SALMONES BLUMAR S.A.</td>
+      <td>8.372255</td>
+      <td>0.555556</td>
+    </tr>
+    <tr>
+      <td>SALMONES CAMANCHACA S.A.</td>
+      <td>8.347876</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <td>SALMONES FRIOSUR S.A.</td>
+      <td>1.284178</td>
+      <td>0.588235</td>
+    </tr>
+    <tr>
+      <td>SALMONES HUMBOLDT SPA</td>
+      <td>8.285066</td>
+      <td>0.533333</td>
+    </tr>
+    <tr>
+      <td>SALMONES ICE VAL LTDA.</td>
+      <td>1.093887</td>
+      <td>0.444444</td>
+    </tr>
+    <tr>
+      <td>SALMONES ISLAS DEL SUR LTDA.</td>
+      <td>8.570813</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <td>SALMONES PACIFIC STAR S.A.</td>
+      <td>8.400399</td>
+      <td>0.470588</td>
+    </tr>
+    <tr>
+      <td>SALMONES RELONCAVI SPA</td>
+      <td>1.146410</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <td>SALMONES TECMAR S.A.</td>
+      <td>8.769765</td>
+      <td>0.562500</td>
+    </tr>
+    <tr>
+      <td>SAYSEN I SPA</td>
+      <td>8.622481</td>
+      <td>0.625000</td>
+    </tr>
+    <tr>
+      <td>SAYSEN II SPA</td>
+      <td>8.622481</td>
+      <td>0.625000</td>
+    </tr>
+    <tr>
+      <td>SEA SALMON LTDA.</td>
+      <td>8.688284</td>
+      <td>0.533333</td>
+    </tr>
+    <tr>
+      <td>SOCIEDAD DE INVERSIONES EL MEMBRILLO LIMITADA</td>
+      <td>1.079836</td>
+      <td>0.642857</td>
+    </tr>
+    <tr>
+      <td>SOCIEDAD DE INVERSIONES ISLA VICTORIA LTDA</td>
+      <td>-0.093264</td>
+      <td>0.545455</td>
+    </tr>
+    <tr>
+      <td>TRUSAL S.A.</td>
+      <td>1.346988</td>
+      <td>0.545455</td>
+    </tr>
+    <tr>
+      <td>UNIVERSIDAD DE ATACAMA</td>
+      <td>2.295088</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <td>UNIVERSIDAD DE LOS LAGOS</td>
+      <td>7.108202</td>
+      <td>0.571429</td>
+    </tr>
+    <tr>
+      <td>YADRAN CISNES S.A.</td>
+      <td>-0.217752</td>
+      <td>0.600000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</body>
+</html>

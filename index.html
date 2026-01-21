@@ -1,0 +1,2209 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artículo — Agregación de valor y bioprocesos (CoDA)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-body: 'Merriweather', serif;
+      --font-ui:  'Source Sans 3', system-ui, sans-serif;
+      --color-ink: #1a1a1a;
+      --color-muted: #5c6670;
+      --color-accent: #0056b3;
+      --color-border: #d8dde2;
+      --color-bg: #ffffff;
+      --color-bg-alt: #f8f9fb;
+      --max-width: 1400px;
+      --article-max: 1000px;
+      --sidebar-width: 300px;
+      --gap: 2rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      line-height: 1.72;
+      color: var(--color-ink);
+      background: var(--color-bg);
+      font-size: 1.05rem;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .ui {
+      font-family: var(--font-ui);
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .logo {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--color-accent), #6b48ff);
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 1.35rem;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.95rem;
+    }
+
+    main {
+      padding: 2rem 0 4rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
+      gap: var(--gap);
+      align-items: start;
+    }
+
+    article.paper {
+      max-width: var(--article-max);
+      background: white;
+      padding: 1.8rem 2rem;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+    }
+
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+
+    .meta {
+      color: var(--color-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1rem;
+    }
+
+    .authors {
+      font-size: 0.95rem;
+      color: #2d3748;
+      margin: 0.6rem 0 1.2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.82rem;
+      padding: 0.35rem 0.7rem;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      background: white;
+      margin-right: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .abstract {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      margin: 1.6rem 0;
+    }
+
+    .abstract h2 {
+      font-family: var(--font-ui);
+      font-size: 1.18rem;
+      margin-bottom: 0.6rem;
+    }
+
+    h2.section {
+      font-size: 1.55rem;
+      margin: 2.5rem 0 1rem;
+      scroll-margin-top: 80px;
+    }
+
+    p {
+      margin-bottom: 1.1rem;
+    }
+
+    .side {
+      position: sticky;
+      top: 5rem;
+    }
+
+    .sidebox {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .sidebox h3 {
+      font-family: var(--font-ui);
+      font-size: 1.05rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .toc {
+      list-style: none;
+      font-family: var(--font-ui);
+      font-size: 0.94rem;
+      color: var(--color-muted);
+      line-height: 1.0;
+    }
+
+    .toc li {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .toc li:last-child {
+      border-bottom: none;
+    }
+
+    .toc a {
+      color: #4a5568;
+    }
+
+    .toc a:hover {
+      color: var(--color-accent);
+    }
+
+    /* Iframes se mantienen intactos */
+    iframe.embed-table {
+      width: 100%;
+      height: 380px;
+      border: 0;
+      background: white;
+      overflow: hidden;
+    }
+
+    iframe.embed-plot {
+      width: 100%;
+      height: 560px;
+      border: 0;
+      background: white;
+    }
+
+    .figure, .tablebox {
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+      margin: 1.8rem 0;
+    }
+
+    .fig-head {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--color-border);
+      background: white;
+      font-family: var(--font-ui);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      font-size: 0.92rem;
+    }
+
+    .caption {
+      padding: 0.8rem 1rem;
+      border-top: 1px solid var(--color-border);
+      background: white;
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      color: var(--color-muted);
+    }
+
+    /* Preguntas destacadas */
+    .pregunta {
+      font-size: 1.25rem;
+      font-style: italic;
+      margin: 1.8rem 0 1.4rem 2.2rem;
+      padding-left: 1.2rem;
+      border-left: 4px solid var(--color-accent);
+      color: #2d3748;
+      position: relative;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .side {
+        position: relative;
+        top: auto;
+      }
+      iframe.embed-plot {
+        height: 480px;
+      }
+      iframe.embed-table {
+        height: 340px;
+      }
+      article.paper {
+        padding: 1.4rem 1.6rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.85rem; }
+      h2.section { font-size: 1.4rem; }
+      .pregunta { font-size: 1.15rem; margin-left: 1.2rem; }
+      .topbar { flex-direction: column; align-items: flex-start; }
+    }
+
+/* Algorithm2e-like (sin marco) */
+.alg2e{
+  font-family: "Times New Roman", Times, serif;
+  font-size: 15px;
+  line-height: 1.25;
+  margin: 14px 0;
+}
+.alg2e .caption{
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+.alg2e .rule{
+  border-top: 1px solid #000;
+  margin: 4px 0 8px 0;
+}
+.alg2e .kw{
+  font-weight: 700;
+  font-variant: small-caps;
+}
+.alg2e .meta{ margin: 2px 0; }
+.alg2e pre{
+  margin: 6px 0 0 0;
+  white-space: pre;
+  font-family: "Times New Roman", Times, serif; /* algorithm2e se ve “roman”, no monospace */
+}
+.alg2e .ln{ display:inline-block; width: 2.2em; text-align: right; padding-right: .6em; }
+.alg2e .tab1{ display:inline-block; width: 1.6em; }
+.alg2e .tab2{ display:inline-block; width: 3.2em; }
+.alg2e .com{ font-style: italic; }
+
+.codejson{
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12.5px;
+  line-height: 1.25;
+  background: #fff;
+  color: #000;
+  padding: 10px 12px;
+  white-space: pre;
+  overflow-x: auto;
+  max-height: 520px;
+}
+
+    /* PLOTS: más altos */
+    iframe.embed-plot{
+      width:100%;
+      height:760px;      /* plots necesitan espacio */
+      border:0;
+      display:block;
+      background:#fff;
+    }
+
+    .caption{
+      padding:10px 12px;
+      border-top:1px solid var(--line);
+      background:#fff;
+      font-family:"Source Sans 3", sans-serif;
+      font-size:10px;
+      color:var(--muted);
+    }
+
+/* ---------------------------
+   ANEXOS: TABLAS INLINE (sin iframe)
+   --------------------------- */
+.table-inline{
+  max-height: 420px;
+  overflow: auto;
+  border-top: 1px solid var(--line);
+  background: #fff;
+}
+.table-inline table{
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 10px;
+  color: #000;
+}
+.table-inline th, .table-inline td{
+  border: 1px solid #000;
+  padding: 2px 6px;
+  background: #fff;
+  color: #000;
+  white-space: nowrap;
+  vertical-align: top;
+}
+.table-inline th{
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* --- Sección Figuras SalmonChile (2x2) --- */
+.anexo-figuras{
+  margin-top: 28px;
+}
+
+.grid-2x2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.fig-card{
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px;
+  background: #8a8a8a;
+}
+
+.fig-card img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.fig-card figcaption{
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #ddd;
+}
+
+/* Responsive: en pantallas estrechas pasa a 1 columna */
+@media (max-width: 860px){
+  .grid-2x2{
+    grid-template-columns: 1fr;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<header class="ui">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="logo"></span>
+        <div class="title">Duoc UC / SPT</div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="articulo.html">Artículo</a>
+        <a href="index.html#figuras">Figuras</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+<div class="layout">
+
+<article class="paper">
+
+<h1>Análisis datos composicional (Aitchison) e inferencia de competencias</h1>
+
+<p class="meta ui">Cuestionario desde composición sectorial</p>
+
+<div class="authors ui">
+rob de la vega  -- tendencas -- Duoc UC
+</div>
+
+<div>
+<span class="badge">Agregación de valor</span>
+<span class="badge">CoDA (Aitchison)</span>
+<span class="badge">Simplex</span>
+<span class="badge">clr / ilr</span>
+<span class="badge">FIPA / Sernapesca</span>
+</div>
+
+<section class="abstract" id="resumen">
+<h2 class="ui">Pregunta</h2>
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Qué competencias exige la estructura real de un sistema productivo cuando se observa cómo funciona y dónde se tensiona?</em>
+</div>
+</div>
+
+<p>Para responder a esta pregunta se procede mediante análisis composicional (Aitchison), lectura estructural de agregación de valor, uso de indicadores sanitarios como variables de fricción, inferencia de competencias desde tensiones observadas. El estudio no reemplaza los marcos internacionales (EQF, marcos sectoriales, etc.), pero: explica por qué ciertas competencias de niveles altos (control, supervisión, integración, aprendizaje) son necesarias, aporta evidencia empírica de dónde y por qué esas competencias se activan.</p>
+
+<strong>La agregación es un contexto para la inferencia</strong>: por tanto no es ni puramente industrial ni puramente biológico. Es la <strong>interfaz</strong> donde: la lógica industrial intenta organizar, acelerar y capturar valor, y aquí los bioprocesos imponen límites, ritmos y umbrales biológicos. Cuando la agregación de valor está desbalanceada, la presión sobre los bioprocesos aumenta. El sistema exige que los procesos vivos se comporten como procesos industriales, lo que no es posible sin costos. Ahí aparece el tratamientos sanitario, la intervención extrema, la pérdida de biomasa, y la  tensión regulatoria.</p>
+</section>
+
+<h2 class="section" id="metodo">Método</h2>
+
+<p>El estudio presupone la <strong>diferencia</strong> entre un proceso industrial y un bioproceso. Ambos se articulan dentro de una cadena de valor. El proceso industrial es estandarizable, opera bajo supuesto de control y repetibilidad, se organiza en torno al flujo, eficiencia, costo y cumplimiento normativo. En la salmonicultura, corresponde principalmente: a) planeación productiva, b) logística, c) procesamiento, d) gestión operativa, y d) sistemas de soporte y control. Aquí se captura y consolida el valor económico. El bioproceso opera sobre un sistema vivo, es intrínsecamente variable y sensible al contexto, no responde completamente a una lógica de control industrial. Incluye: desarrollo biológico en agua dulce, crecimiento y salud en engorda marina, interacción con el ambiente, respuesta fisiológica al manejo e intervención. Aquí el valor no se controla, se condiciona. </p>
+
+<p>La composición del valor sectorial requiere de los siguientes pasos:</p>
+
+<ul>
+<li><strong>Recolectar y depurar la evidencia base por titular.</strong> Construye una tabla maestra con columnas mínimas: WEB, TITULAR, PAIS, LATITUD, LONGITUD, AGREGACION DE VALOR (texto corregido y verificable). Normaliza nombres (mayúsculas, sin tildes), elimina duplicados y deja una fila por unidad de análisis (empresa o holding).</li>
+<li><strong>Definir el modelo de agregación de valor como composición cerrada.</strong> Establece las partes AD, MAR, PROC, ID, SOP como dimensiones del proceso de agregación de valor (no bioprocesos), y crea un léxico de keywords por cada parte para contar evidencia en el texto. Ejecuta el conteo por fila y convierte esos conteos a proporciones (cierre): cada empresa queda como un vector positivo que suma 1.</li>
+<li><strong>Controlar de calidad composicional.</strong> Verifica que no existan ceros (aplica pseudoconteo EPS), que todas las filas sumen 1, y que los rangos sean plausibles. Genera la tabla de proporciones (“firmas”) y expórtala a HTML para auditoría (scroll único, columna empresa ancha, numéricas iguales).</li>
+<li><strong>Analizar CoDA en el simplex (Aitchison).</strong> Aplica transformaciones log-ratio: clr para inspección y distancias, y ilr para balances interpretables (por ex: Producción = {AD,MAR,PROC} versus Adaptación/Soporte = {ID,SOP}). Calcula métricas globales (centroides, dispersión) y métricas por empresa (balances). Exporta tablas clr e ilr a HTML.</li>
+<li><strong>Crear subcomposiciones y triángulos (lectura estructural).</strong> Seleccionar 6 triángulos simétricos relevantes (v.gr: AD–MAR–PROC, AD–MAR–ID, AD–MAR–SOP, MAR–PROC–ID, MAR–PROC–SOP, PROC–ID–SOP). Para cada triángulo construye subcomposición cerrada y grafica con Plotly ternario, enriqueciendo hover con perfil dominante, zona (dominante vs segunda) y una conclusión corta. Exporta cada gráfico a HTML y es puesto aquí como iframe.</li>
+<li><strong>Establecer la fragilidad subcomposicional y riesgo operativo.</strong> Define y calcula FRAGILIDAD_SUBCOMP como sensibilidad estructural (cambios de lectura al remover una parte o como concentración/monodominancia en subcomposiciones). Cruza fragilidad con el balance ilr (producción↔adaptación) en un scatter interactivo y usa umbrales para clasificar riesgo (bajo/medio/alto). Exporta el plot y una tabla resumen a HTML.</li>
+<li><strong>Inferir competencias por zona + riesgo (motor liviano).</strong> Define reglas de asignación: ZONA = dominante_vs_segunda en cada triángulo y RIESGO desde fragilidad. Crea un diccionario pequeño de competencias (3 por zona) y ajusta el lenguaje según riesgo (prevención/control cuando es alto). Genera tablas por empresa con competencias recomendadas y dashboards donde el hover entregue “qué significa su posición” y “qué capacidades faltan”.</li>
+</ul>
+
+
+<h2 class="section" id="inferir">Paso 1: Inferencia de la agregación de valor</h2>
+
+<p>Se realiza una inferencia semántica sobre los sitios web de todas las empresas salmoneras: descarga el contenido, extrae el texto realmente visible, lo normaliza y lo convierte en una evidencia verificable de cómo cada empresa describe su agregación de valor. Luego, esa evidencia se clasifica automáticamente usando un léxico ancla que detecta señales lingüísticas asociadas a cinco dimensiones del proceso: AD (Adaptación), cuando el texto enfatiza personalización, ajuste a requerimientos o flexibilidad; MAR (alimentación-engorda), cuando se destaca posicionamiento, clientes, propuesta comercial o diferenciación; PROC (Procesos/producción), cuando la narrativa se centra en operación, manufactura, logística, eficiencia o control de procesos; ID (Innovación y desarrollo), cuando aparecen I+D, tecnología, mejora continua o diseño de soluciones; y SOP (Soporte/servicios habilitantes), cuando predominan soporte técnico, postventa, certificaciones, compliance o infraestructura de servicio. Con esos indicadores, el sistema genera como salida una tabla por empresa donde la columna “Agregación de valor” queda como un texto corregido y trazable a su fuente, junto con los conteos y proporciones AD–MAR–PROC–ID–SOP que resumen su “firma” de valor. El algoritmo es conceptual para su implementación en python: </p>
+
+<div class="alg2e" role="figure" aria-label="Algoritmo: Extracción semántica (ilustrativo)">
+<div class="caption">Algoritmo 1: Extracción semántica de evidencia web para cadena de valor</div>
+<div class="rule"></div>
+
+<div class="meta"><span class="kw">KwData</span>: URLs, reglas de limpieza, diccionario ancla {AD,MAR,PROC,ID,SOP}, EPS</div>
+<div class="meta"><span class="kw">KwResult</span>: tabla maestra + firmas composicionales (proporciones cerradas) por empresa</div>
+<div class="rule"></div>
+
+<pre>
+<span class="ln">1</span><span class="kw">for each</span> url ∈ URLs <span class="kw">do</span>
+<span class="ln">2</span><span class="tab1"></span>html ← Download(url); SaveRaw(html, url, timestamp)
+<span class="ln">3</span><span class="tab1"></span>text ← VisibleText(html)
+<span class="ln">4</span><span class="tab1"></span>text ← Normalize(text)  <span class="com">// mayúsculas, espacios, artefactos, nombres</span>
+<span class="ln">5</span><span class="tab1"></span>firm ← ResolveEntity(text, url)  <span class="com">// empresa/holding; deduplicación</span>
+<span class="ln">6</span><span class="tab1"></span>evidence ← ExtractValueAdded(text) <span class="com">// fragmentos verificables + referencia</span>
+<span class="ln">7</span><span class="tab1"></span>counts[AD,MAR,PROC,ID,SOP] ← CountAnchors(evidence, Lexicon)
+<span class="ln">8</span><span class="tab1"></span><span class="kw">if</span> AnyZero(counts) <span class="kw">then</span> counts ← counts + EPS
+<span class="ln">9</span><span class="tab1"></span>signature ← Closure(counts) <span class="com">// signature_i = counts_i / Σcounts</span>
+<span class="ln">10</span><span class="tab1"></span>AppendRow(MasterTable, firm, url, evidence, signature)
+<span class="ln">11</span><span class="kw">end</span>
+<span class="ln">12</span>ExportHTML(MasterTable); ExportHTML(Signatures)
+</pre>
+</div>
+
+<br>
+
+<h3 class="section" id="componer">Se obtiene la siguiente tabla:
+</h3>
+
+<!-- tabla 1 ... -->
+<div class="tablebox">
+<div class="fig-head">
+<div class="label ui">Tabla 1</div>
+<div class="note ui">Firmas estructurales por empresa (proporciones)</div>
+</div>
+<iframe class="embed-table" src="00_tabla_df_original.html" loading="lazy" scrolling="no"></iframe>
+<div class="caption ui">Tabla 1. Agregación de valor inferida.</div>
+</div>
+
+<h2 class="section" id="dimensión">Paso 2: Transformar agregación de valor en proporciones</h2>
+
+<p>Este algoritmo introduce la lógica que convierte texto web “desordenado” en una tabla numérica comparable entre empresas. Primero, cada empresa se representa como una composición AD–MAR–PROC–ID–SOP (proporciones que suman 1) inferida desde su evidencia de agregación de valor; luego esa composición se transforma con CLR (centered log-ratio) para poder analizarla en un espacio euclídeo sin caer en comparaciones engañosas típicas de datos porcentuales. Cada fila corresponde a una empresa y sus columnas resumen su perfil composicional en coordenadas CLR: EMPRESA identifica la unidad de análisis; clr_AD es la intensidad relativa de Adaptación (personalización/flexibilidad); clr_MAR captura engorda(alimentación); clr_PROC refleja Procesos/producción (operación, eficiencia, control); clr_ID representa Innovación y desarrollo (I+D, tecnología, mejora); y clr_SOP corresponde a Soporte (postventa, certificaciones, cumplimiento). En esta codificación, valores CLR positivos indican énfasis por sobre el promedio geométrico de la firma de la empresa, y negativos indican menor peso relativo.</p>
+
+
+<p>Estructura dimensiones de agregación de valor:</p>
+
+<pre class="codejson">[
+  {
+    "dimension": "AD",
+    "nombre_dimension": "Biología temprana / Agua dulce",
+    "descripcion": "Configuración del potencial biológico inicial y condicionamiento del ciclo productivo",
+    "keywords_ancla": [
+      {"termino": "piscicultura", "peso": 1.0, "contexto": "infraestructura"},
+      {"termino": "agua dulce", "peso": 0.8, "contexto": "entorno"},
+      {"termino": "smoltificación", "peso": 1.0, "contexto": "bioproceso"},
+      {"termino": "alevinaje", "peso": 0.9, "contexto": "bioproceso"},
+      {"termino": "ovas", "peso": 0.7, "contexto": "biología"},
+      {"termino": "RAS", "peso": 0.9, "contexto": "infraestructura"},
+      {"termino": "fotoperíodo", "peso": 0.8, "contexto": "manejo biológico"},
+      {"termino": "genética", "peso": 0.6, "contexto": "biología"}
+    ],
+    "exclusiones": ["acuario", "ornamental", "pesca recreativa"]
+  },
+
+  {
+    "dimension": "MAR",
+    "nombre_dimension": "Engorda marina / Producción biológica",
+    "descripcion": "Producción intensiva de biomasa en ambiente abierto bajo manejo industrial",
+    "keywords_ancla": [
+      {"termino": "centros de engorda", "peso": 1.0, "contexto": "infraestructura"},
+      {"termino": "jaulas", "peso": 0.9, "contexto": "infraestructura"},
+      {"termino": "engorda en mar", "peso": 1.0, "contexto": "bioproceso"},
+      {"termino": "alimentación", "peso": 0.8, "contexto": "nutrición"},
+      {"termino": "biomasa", "peso": 0.7, "contexto": "producción"},
+      {"termino": "densidad de cultivo", "peso": 0.9, "contexto": "manejo"},
+      {"termino": "sanidad", "peso": 0.8, "contexto": "bioproceso"},
+      {"termino": "caligus", "peso": 0.9, "contexto": "presión parasitaria"}
+    ],
+    "exclusiones": ["pesca artesanal", "extractiva", "acuicultura de pequeña escala"]
+  },
+
+  {
+    "dimension": "PROC",
+    "nombre_dimension": "Proceso industrial / Captura de valor",
+    "descripcion": "Transformación industrial de biomasa en productos estandarizados",
+    "keywords_ancla": [
+      {"termino": "planta de proceso", "peso": 1.0, "contexto": "infraestructura"},
+      {"termino": "procesamiento", "peso": 0.9, "contexto": "industrial"},
+      {"termino": "fileteado", "peso": 0.8, "contexto": "industrial"},
+      {"termino": "congelado", "peso": 0.7, "contexto": "industrial"},
+      {"termino": "cosecha", "peso": 0.9, "contexto": "operación"},
+      {"termino": "exportación", "peso": 0.6, "contexto": "comercial"},
+      {"termino": "valor agregado", "peso": 0.8, "contexto": "económico"}
+    ],
+    "exclusiones": ["restaurante", "venta minorista", "comercialización gastronómica"]
+  },
+
+  {
+    "dimension": "ID",
+    "nombre_dimension": "Exploración / Aprendizaje / Innovación",
+    "descripcion": "Capacidad de adaptación, experimentación y ajuste del sistema productivo",
+    "keywords_ancla": [
+      {"termino": "I+D", "peso": 1.0, "contexto": "innovación"},
+      {"termino": "investigación aplicada", "peso": 0.9, "contexto": "conocimiento"},
+      {"termino": "ensayos", "peso": 0.8, "contexto": "experimentación"},
+      {"termino": "mejora continua", "peso": 0.7, "contexto": "gestión"},
+      {"termino": "transferencia tecnológica", "peso": 0.9, "contexto": "aprendizaje"},
+      {"termino": "optimización de procesos", "peso": 0.6, "contexto": "gestión"},
+      {"termino": "datos productivos", "peso": 0.6, "contexto": "analítica"}
+    ],
+    "exclusiones": ["marketing", "publicidad", "branding"]
+  },
+
+  {
+    "dimension": "SOP",
+    "nombre_dimension": "Soporte / Gobernanza / Control",
+    "descripcion": "Funciones organizacionales que permiten estabilidad, cumplimiento y control sistémico",
+    "keywords_ancla": [
+      {"termino": "cumplimiento normativo", "peso": 1.0, "contexto": "regulación"},
+      {"termino": "certificación", "peso": 0.9, "contexto": "control"},
+      {"termino": "SERNAPESCA", "peso": 0.8, "contexto": "regulación"},
+      {"termino": "bioseguridad", "peso": 0.9, "contexto": "control"},
+      {"termino": "monitoreo", "peso": 0.8, "contexto": "control"},
+      {"termino": "gestión sanitaria", "peso": 0.7, "contexto": "gobernanza"},
+      {"termino": "sostenibilidad", "peso": 0.6, "contexto": "marco institucional"}
+    ],
+    "exclusiones": ["responsabilidad social genérica", "filantropía", "memoria corporativa"]
+  }
+]</pre>
+
+<div class="alg2e" role="figure" aria-label="Algoritmo: Tabla CLR por empresa">
+<div class="caption">Algoritmo 2: Construcción de tabla CLR (Aitchison) para firmas de agregación de valor</div>
+<div class="rule"></div>
+
+<div class="meta"><span class="kw">KwData</span>: tabla maestra con evidencia textual por empresa, léxico {AD,MAR,PROC,ID,SOP}, EPS</div>
+<div class="meta"><span class="kw">KwResult</span>: tabla CLR = [EMPRESA, clr_AD, clr_MAR, clr_PROC, clr_ID, clr_SOP]</div>
+<div class="rule"></div>
+
+<pre>
+<span class="ln">1</span><span class="kw">for each</span> empresa ∈ MasterTable <span class="kw">do</span>
+<span class="ln">2</span><span class="tab1"></span>text ← empresa.AGREGACION_DE_VALOR
+<span class="ln">3</span><span class="tab1"></span>counts[AD,MAR,PROC,ID,SOP] ← CountAnchors(text, Lexicon)
+<span class="ln">4</span><span class="tab1"></span><span class="kw">if</span> AnyZero(counts) <span class="kw">then</span> counts ← counts + EPS
+
+<span class="ln">5</span><span class="tab1"></span>p ← Closure(counts)
+<span class="ln">6</span><span class="tab1"></span><span class="com">// p es composición: p_i &gt; 0 y Σp_i = 1</span>
+
+<span class="ln">7</span><span class="tab1"></span>g ← GeometricMean(p)
+<span class="ln">8</span><span class="tab1"></span><span class="kw">for each</span> parte i ∈ {AD,MAR,PROC,ID,SOP} <span class="kw">do</span>
+<span class="ln">9</span><span class="tab2"></span>clr_i ← ln(p_i / g)
+<span class="ln">10</span><span class="tab1"></span><span class="kw">end</span>
+
+<span class="ln">11</span><span class="tab1"></span>AppendRow(CLR_Table, empresa, clr_AD, clr_MAR, clr_PROC, clr_ID, clr_SOP)
+<span class="ln">12</span><span class="kw">end</span>
+
+<span class="ln">13</span>ExportHTML(CLR_Table)
+</pre>
+</div>
+
+<h3 class="section" id="componer">Se obtiene la siguiente tabla:
+</h3>
+
+<!-- tabla 2 ... -->
+<div class="tablebox" id="tabla-firmas">
+<div class="fig-head">
+<div class="label ui">Tabla 2</div>
+<div class="note ui">Firmas estructurales por empresa (proporciones)</div>
+</div>
+
+<iframe class="embed-table" src="tabla_clr_salmoneras.html" loading="lazy" scrolling="no"></iframe>
+<div class="caption ui">
+Tabla 2. Firma composicional: núcleo productivo (AD/MAR/PROC), adaptación (ID) y soporte (SOP).
+</div>
+</div>
+
+
+<h2 class="section" id="metodo">Paso 3: Vista ternaria: subcomposición para análisis</h2>
+
+<p>Se construye una vista ternaria subcomposicional a partir de la firma composicional original de cada empresa. En vez de trabajar con las cinco dimensiones completas (AD, MAR, PROC, ID, SOP), selecciona solo el triángulo AD–MAR–PROC y aplica cierre subcomposicional: es decir, para cada empresa se recalcula AD, MAR y PROC como proporciones relativas entre ellas, dividiendo cada valor por la suma AD+MAR+PROC de su propia fila. El resultado es una tabla donde cada fila queda en el simplex ternario (AD+MAR+PROC = 1) y por lo tanto permite comparar empresas solo en ese subespacio, sin “contaminación” de ID y SOP. La tabla exportada contiene la columna EMPRESA (identificador) y las tres columnas numéricas AD, MAR y PROC, que representan el peso relativo de Adaptación (biología temprana/agua dulce), Producción biológica marina y Proceso industrial/captura de valor, respectivamente, dentro del triángulo elegido.</p>
+
+<div class="alg2e" role="figure" aria-label="Algoritmo: Exportación HTML tabla subcomposicional ternaria">
+<div class="caption">Algoritmo: Tabla subcomposicional ternaria (AD–MAR–PROC) exportada a HTML (iframe)</div>
+<div class="rule"></div>
+
+<div class="meta"><span class="kw">KwData</span>: df_comp_limpio con columnas [EMPRESA, AD, MAR, PROC, ID, SOP]</div>
+<div class="meta"><span class="kw">KwResult</span>: iframe HTML con tabla cerrada AD–MAR–PROC (scroll vertical, sin colores)</div>
+<div class="rule"></div>
+
+<pre>
+<span class="ln">1</span><span class="com">// Subcomposición ternaria (selección de partes)</span>
+<span class="ln">2</span>ternary_parts ← ["AD","MAR","PROC"]
+<span class="ln">3</span>df_ternary ← CopyColumns(df_comp_limpio, ["EMPRESA"] + ternary_parts)
+
+<span class="ln">4</span><span class="com">// Cierre subcomposicional: normalizar cada fila para que AD+MAR+PROC = 1</span>
+<span class="ln">5</span><span class="kw">for each</span> row r ∈ df_ternary <span class="kw">do</span>
+<span class="ln">6</span><span class="tab1"></span>s ← r.AD + r.MAR + r.PROC
+<span class="ln">7</span><span class="tab1"></span>r.AD   ← r.AD   / s
+<span class="ln">8</span><span class="tab1"></span>r.MAR  ← r.MAR  / s
+<span class="ln">9</span><span class="tab1"></span>r.PROC ← r.PROC / s
+<span class="ln">10</span><span class="kw">end</span>
+
+</pre>
+</div>
+
+<h3 class="section" id="componer">Se obtiene la siguiente tabla:
+</h3>
+
+<div class="tablebox" id="tabla-firmas">
+<div class="fig-head">
+<div class="label ui">Tabla 3</div>
+<div class="note ui">Firmas estructurales por empresa (proporciones)</div>
+</div>
+
+<iframe class="embed-table" src="tabla_subcomposicion_AD_MAR_ID.html" loading="lazy" scrolling="no"></iframe>
+<div class="caption ui">
+Tabla 3. Subcomposicion AD - MAR - ID
+</div>
+</div>
+
+
+<h2 class="section" id="componer">Componer</h2>
+
+<p>Los triángulos (subcomposiciones) actúan como “lentes” para ver tensiones. No miden tamaño; muestran orientación estructural. Las conclusiones se apoyan en dominancia, borde (tensión doble) y fragilidad subcomposicional. Además se obtiene material de analisis que facilita la inferencia de competencias desde las tensiones tetectadas y preguntas que puede formular un investigador sectorial a los ientrevistados clave.</p>
+
+<!-- PLOT 1 -->
+
+<h3 class="section" id="componer">Triángulo AD – MAR – PROC</h3>
+
+<p>La tendencia inferida en el triángulo AD–MAR–PROC es una especialización estructural persistente en MAR, con una subordinación funcional de AD y PROC. No se trata de un movimiento temporal, sino de una configuración estable que el sistema reproduce: la engorda concentra la mayor parte de la agregación de valor, mientras la biología temprana y el procesamiento operan como soportes ajustados a las necesidades de MAR. Esta concentración indica homogeneización del modelo productivo, donde la eficiencia de engorda domina las decisiones y reduce la diversidad estructural del sector.</p>
+
+<p>Las implicancias de esta tendencia son claras: el sistema gana eficiencia operativa pero pierde grados de libertad adaptativos, aumentando la fragilidad ante shocks sanitarios, regulatorios o ambientales que afecten directamente a MAR. La escasa ocupación de zonas cercanas al centro del triángulo sugiere que el balance funcional no es el régimen dominante, y la débil presencia de PROC como vértice autónomo revela una captura de valor industrial limitada. En síntesis, la tendencia no es al crecimiento ni a la innovación, sino a la reproducción de un patrón productivo rígido, eficiente en condiciones normales y vulnerable cuando esas condiciones cambian.</p>
+
+        <div class="figure" id="fig-ternario">
+          <div class="fig-head">
+            <div class="label ui">Figura 1</div>
+            <div class="note ui">AD – MAR – PROC (subcomposición)</div>
+          </div>
+
+          <iframe class="embed-plot" src="dashboard_detallado.html" loading="lazy"></iframe>
+
+          <div class="caption ui">
+            Figura 1. Mapa ternario de subcomposición AD–MAR–PROC. Hover entrega interpretación por empresa.
+          </div>
+        </div>
+
+<!-- PLOT 2 -->
+
+<h3 class="section" id="componer">Triángulo AD – MAR – ID</h3>
+
+<p>La tendencia en el triángulo AD–MAR–ID muestra una clara primacía de la biología productiva (AD y MAR) por sobre la exploración y adaptación (ID), configurando un sistema orientado a la ejecución biológica conocida más que a la generación sistemática de nuevas opciones productivas. La nube de puntos se concentra lejos del vértice ID, lo que indica que la investigación y la experimentación no operan como funciones estructurales autónomas dentro de las salmoneras, sino como apoyos periféricos, activados de manera puntual y subordinada a las necesidades inmediatas de la producción. Esta configuración no es transitoria: expresa una tendencia estable a privilegiar la reproducción de ciclos biológicos probados, minimizando la redistribución de valor hacia actividades exploratorias.</p>
+
+<p>Las implicancias de esta tendencia son una capacidad adaptativa limitada frente a cambios estructurales del entorno (sanitarios, climáticos o regulatorios) y una dependencia creciente de soluciones externas (proveedores tecnológicos, regulación, conocimiento importado) para enfrentar disrupciones. La escasa ocupación del espacio cercano al centro del triángulo sugiere que el equilibrio entre producción y exploración no constituye el régimen dominante, reforzando una lógica de optimización de corto plazo. En términos sistémicos, el sector muestra una tendencia a explotar eficientemente lo que ya sabe hacer, pero con débil inversión estructural en aprender a hacer algo distinto, lo que incrementa la fragilidad adaptativa a mediano y largo plazo.</p>
+
+        <div class="figure" id="fig-ternario">
+          <div class="fig-head">
+            <div class="label ui">Figura 2</div>
+            <div class="note ui">AD – MAR – ID (subcomposición)</div>
+          </div>
+
+          <iframe class="embed-plot" src="dashboard_detallado2.html" loading="lazy"></iframe>
+
+          <div class="caption ui">
+            Figura 2. Mapa ternario de subcomposición AD – MAR – ID. Hover entrega interpretación por empresa.
+          </div>
+        </div>
+
+<!-- PLOT 3 -->
+
+<h3 class="section" id="componer">Triángulo AD – MAR – SOP</h3>
+
+<p>En el triángulo AD–MAR–SOP la lectura no es “más producción = mejor”, sino qué tan sostenida está la producción por estructura: cuando la empresa se concentra en AD y MAR sin un SOP proporcional, el sistema opera con rendimiento pero queda expuesto a fragilidad (la operación corre más rápido que su capacidad de control, coordinación y cumplimiento), volviéndose dependiente de correcciones reactivas ante eventos sanitarios, logística o descansos productivos; en cambio, cuando SOP gana peso, aparece una organización que convierte la producción en un proceso gobernable (monitoreo, trazabilidad, protocolos, auditorías y respuesta temprana), lo que tiende a disminuir variabilidad y riesgo sistémico aunque a veces “cueste” eficiencia inmediata. En síntesis, este triángulo separa a quienes producen de quienes además pueden sostener producción sin romperse, y esa diferencia es exactamente donde se juega la competitividad real bajo presión sanitaria y regulatoria.</p>
+
+        <div class="figure" id="fig-ternario">
+          <div class="fig-head">
+            <div class="label ui">Figura 3</div>
+            <div class="note ui">AD–MAR–SOP (subcomposición)</div>
+          </div>
+
+          <iframe class="embed-plot" src="dashboard_detallado3.html" loading="lazy"></iframe>
+
+          <div class="caption ui">
+            Figura 3. Mapa ternario de subcomposición AD–MAR–SOP. Hover entrega interpretación por empresa.
+          </div>
+        </div>
+
+
+<!-- PLOT 4 -->
+
+<h3 class="section" id="componer">Triángulo MAR - PROC - ID</h3>
+
+<p>En el triángulo MAR–PROC–ID la tensión central no es solo “cultivar versus procesar”, sino capturar valor hoy versus aprender para sostenerlo mañana: cuando domina MAR, la empresa se apoya en la ejecución operativa del engorde y en el control del bioproceso como fuente principal de rendimiento, pero corre el riesgo de repetir patrones y reaccionar tarde si no transforma datos en aprendizaje; cuando domina PROC, la lógica se desplaza hacia estandarización industrial, rendimiento de planta y consistencia del producto, lo que puede mejorar la captura inmediata pero también ocultar problemas upstream si la retroalimentación hacia mar es débil; y cuando gana peso ID, aparece la capacidad de convertir desviaciones (sanidad, mortalidad, tratamientos, calidad) en rediseño de protocolos, pilotos y mejora continua, habilitando adaptación real frente a incertidumbre. En síntesis, este triángulo diferencia a las empresas que solo ejecutan y cosechan de las que además aprenden del sistema, y ese aprendizaje es lo que reduce fragilidad y sostiene competitividad cuando el entorno cambia.</p>
+
+
+        <div class="figure" id="fig-ternario">
+          <div class="fig-head">
+            <div class="label ui">Figura 4</div>
+            <div class="note ui">MAR–PROC–ID (subcomposición)</div>
+          </div>
+
+          <iframe class="embed-plot" src="dashboard_detallado4.html" loading="lazy"></iframe>
+
+          <div class="caption ui">
+            Figura 4. Mapa ternario de subcomposición MAR–PROC–ID. Hover entrega interpretación por empresa.
+          </div>
+        </div>
+
+<!-- PLOT 5 -->
+
+<h3 class="section" id="componer">Triángulo MAR – PROC – SOP</h3>
+
+<p>En el triángulo MAR–PROC–SOP la tensión composicional se lee como industrializar el valor versus gobernar el sistema que lo produce: cuando domina MAR, la empresa captura valor desde la operación biológica en centros, pero su desempeño queda altamente sensible a coordinación logística, sanidad y ventanas críticas de cosecha si el soporte estructural no acompaña; cuando domina PROC, el foco está en la planta como mecanismo de estandarización y captura industrial (rendimiento, formatos, calidad, continuidad), pero puede volverse un “embudo” si la gobernanza no asegura biomasa consistente y trazable; y cuando gana peso SOP, la ventaja no es producir más, sino producir bajo control (protocolos, trazabilidad, cumplimiento, reporting y respuesta anticipada), reduciendo variabilidad y riesgo sistémico incluso si eso limita decisiones de corto plazo. En síntesis, este triángulo separa a quienes dependen de la fuerza de su bioproceso o su fábrica, de quienes sostienen ambas mediante gobernanza operativa, que es lo que permite industrializar sin que el sistema se desordene cuando aumenta la presión sanitaria y regulatoria.<p/>
+
+
+        <div class="figure" id="fig-ternario">
+          <div class="fig-head">
+            <div class="label ui">Figura 5</div>
+            <div class="note ui">MAR–PROC–SOP (subcomposición)</div>
+          </div>
+
+          <iframe class="embed-plot" src="dashboard_detallado5.html" loading="lazy"></iframe>
+
+          <div class="caption ui">
+            Figura 5. Mapa ternario de subcomposición MAR–PROC–SOP. Hover entrega interpretación por empresa.
+          </div>
+        </div>
+
+<!-- PLOT 6 -->
+
+<h3 class="section" id="componer">Triángulo PROC – ID – SOP</h3>
+
+<p>En el triángulo PROC–ID–SOP la estructura revela si la empresa está diseñada para capturar valor industrial, aprender del sistema, o sostenerse con gobernanza, porque aquí ya no manda la producción biológica sino la capacidad de convertirla en desempeño estable: cuando domina PROC, el valor se busca en estandarización, rendimiento de planta y formatos, pero aparece el riesgo de “optimizar la fábrica” mientras el sistema real se desordena si no hay aprendizaje ni soporte que corrija causas; cuando domina ID, la organización está orientada a transformar datos, fallas y variabilidad en rediseño de procesos y mejora continua, lo que fortalece adaptación pero puede quedar en diagnóstico eterno si no aterriza en control operativo; y cuando domina SOP, la prioridad es trazabilidad, cumplimiento, coordinación y gestión del riesgo, lo que amortigua la fragilidad y permite consistencia, aunque sin PROC e ID puede convertirse en burocracia sin productividad. En síntesis, este triángulo separa a quienes solo capturan, de quienes aprenden, y de quienes gobiernan la captura y el aprendizaje como un sistema, que es precisamente lo que define sostenibilidad operativa bajo presión sanitaria, regulatoria y de mercado.</p>
+
+        <div class="figure" id="fig-ternario">
+          <div class="fig-head">
+            <div class="label ui">Figura 6</div>
+            <div class="note ui">PROC  – ID – SOP (subcomposición)</div>
+          </div>
+
+          <iframe class="embed-plot" src="dashboard_detallado6.html" loading="lazy"></iframe>
+
+          <div class="caption ui">
+            Figura 6. Mapa ternario de subcomposición PROC – ID – SOP. Hover entrega interpretación por empresa.
+          </div>
+        </div>
+
+<h2 class="section" id="componer">ILR producción↔adaptación vs fragilidad</h2>
+
+        <div class="figure" id="fig-ilr">
+          <div class="fig-head">
+            <div class="label ui">Figura 2</div>
+            <div class="note ui">ILR producción↔adaptación vs fragilidad</div>
+          </div>
+
+<p>Este gráfico cruza dos señales que no se deben mirar por separado: el balance producción↔adaptación (ILR) en el eje X y la fragilidad subcomposicional en el eje Y. A la derecha quedan las empresas cuyo núcleo está más orientado a adaptación/aprendizaje (más capacidad de absorber variación, rediseñar protocolos y ajustar decisiones), y a la izquierda las más productivas/ejecutoras (más dependencia de que el ciclo “salga bueno” para que todo cuadre). Hacia arriba aumenta la fragilidad: no significa “mala empresa”, sino que su estructura queda más expuesta a shocks (sanidad, tratamientos, mortalidad, ventanas de cosecha, coordinación logística) porque el sistema está más tensionado o concentrado. El hover permite leer casos concretos empresa por empresa en el plan de su composición.</p>
+
+<!-- PLOT -->
+
+<iframe class="embed-plot" src="plot_grafito_neon.html" loading="lazy"></iframe>
+<div class="caption ui">
+Figura 2. Balance ilr (prod vs adapt) contra fragilidad subcomposicional. Líneas guían lectura por cuadrantes.
+</div>
+</div>
+
+<div class="tablebox" id="tabla-ilr-frag">
+<div class="fig-head">
+<div class="label ui">Tabla 4</div>
+<div class="note ui">ILR y fragilidad por empresa</div>
+</div>
+
+<!-- TABLA -->
+<iframe class="embed-table" src="tabla_ilr_fragilidad.html" loading="lazy" scrolling="no"></iframe>
+
+<div class="caption ui">
+Tabla 4. ILR_PROD_ADAPT y FRAGILIDAD_SUBCOMP para priorización de intervención formativa.
+</div>
+</div>
+
+<p>La lectura de tabla/gráfico es estratégica. El cuadrante arriba-izquierda es el más critico (alta fragilidad con sesgo productivo): rinden, pero se rompen; ahí las competencias que faltan no son “más producción”, sino control, anticipación, trazabilidad, respuesta sanitaria y coordinación. El arriba-derecha es “fragilidad con capacidad adaptativa”: hay aprendizaje, pero todavía no baja el riesgo. Aquí la brecha típica es convertir experimentación y datos en control operativo efectivo (no quedarse en el puro diagnóstico). El abajo-izquierda es productividad estable (eficiencia con bajo riesgo), y el abajo-derecha es muy buen  escenario estructural (adaptación con baja fragilidad): organizaciones que no solo producen, sino que pueden sostener producción bajo presión. Este gráfico interactivo funciona como un mapa para priorizar competencias por tipo de empresa por tensión real del sistema.</p>
+
+<h2 class="section" id="competencias">Competencias</h2>
+
+<p>Las competencias no se asignan por “triángulo” de forma fija. Se infieren por zona (dominante vs segunda) y se ajustan por riesgo/fragilidad, para que el usuario que navega el gráfico aprenda “qué hacer” según estructura.</p>
+
+<p>Este estudio toma una práctica que ya ha sido usada en otros trabajos de inferencia de competencias de la SPT (pasar de evidencia observable a capacidades requeridas) pero se fortalece metodológicamente: la competencia no se infiere desde opiniones ni desde listas genéricas, sino desde la posición estructural de cada actor en un sistema productivo. En enfoques clásicos se parte de entrevistas, perfiles ocupacionales, análisis documental o descomposición de tareas, y se termina “proponiendo” competencias. Aquí, en cambio, primero se reconstruye el rol real de agregación de valor de cada titular (AD, MAR, PROC, ID, SOP) y se transforma en una firma composicional que obliga a trabajar con proporciones y tensiones, no con magnitudes. Esa decisión cambia el tipo de inferencia: en vez de preguntar “qué falta”, se detecta dónde el sistema está cargado, qué fases dominan, cuáles quedan subordinadas, y qué combinaciones son más frágiles frente a variación operativa. Por eso este método se parece a los estudios previos en su intención (traducir realidad en competencias), pero se separa en su fundamento: aquí la evidencia no es narrativa, sino estructura.</p>
+
+<p>La incorporación de CoDA, balances ilr y fragilidad subcomposicional añade un componente que normalmente no existe en la inferencia tradicional: la competencia queda vinculada a riesgo y a estabilidad del sistema. En los triángulos ternarios la empresa no “es” una cosa, sino que ocupa una zona donde se expresa una tensión (producción vs soporte, captura vs aprendizaje, industrialización vs gobernanza); la fragilidad, por su parte, indica cuán sensible es esa firma a perder coherencia cuando cambia una dimensión, lo que equivale a preguntarse cuán rápido la operación pasa de controlada a reactiva. Con esa combinación, las competencias inferidas ya no son amplias ni decorativas: se vuelven expresiones de decisión y control en condiciones concretas (“anticipar”, “estabilizar”, “gobernar”, “rediseñar”, “coordinar”). En suma, el método conserva la lógica de inferir capacidades desde evidencia, pero eleva el estándar: las competencias emergen como respuesta técnica a tensiones composicionales y a fragilidades del bioproceso, lo que las hace defendibles para prospectiva de empleabilidad y para diseño curricular con respaldo estructural.</p>
+
+<h2 class="section" id="competencias">Competencias bioprocesales inferidas desde ICA (antimicrobianos)</h2>
+
+<p>Competencias inferidas directamente desde lo que ICA pone en evidencia. No son competencias genéricas y no dependen del tamaño del holding.</p>
+
+<div>
+<table style="width:100%; border-collapse:collapse; font-family:Consolas,'Courier New',monospace; font-size:11px; color:#000;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:center; position:sticky; top:0; background:#fff;">Nº</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:left; position:sticky; top:0; background:#fff;">Competencia inferida</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:center; position:sticky; top:0; background:#fff;">Dimensión AV predominante</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:left; position:sticky; top:0; background:#fff;">Qué tensión de ICA la activa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">1</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Diseñar estrategias preventivas de control bacteriano integradas al ciclo productivo</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Uso reiterado de antimicrobianos como respuesta reactiva</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">2</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Interpretar señales sanitarias tempranas para anticipar brotes infecciosos</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">ICA alto con biomasa muerta creciente</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">3</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Ajustar densidades, calendarios y flujos de biomasa en función de riesgo sanitario</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Alta variabilidad entre ciclos cerrados</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">4</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Integrar información sanitaria, ambiental y productiva en decisiones operativas</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Tratamientos aplicados tarde o de forma masiva</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">5</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Evaluar impacto acumulado de tratamientos antimicrobianos sobre desempeño del ciclo</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR / SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Repetición de principios activos</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">6</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Rediseñar protocolos de manejo para reducir dependencia farmacológica</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">ICA alto persistente en el tiempo</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">7</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Implementar planes de aprendizaje sanitario a partir de ciclos anteriores</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Mismos patrones de tratamiento en ciclos sucesivos</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">8</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Coordinar equipos productivos y sanitarios en decisiones bajo incertidumbre</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Respuestas fragmentadas a eventos sanitarios</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">9</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Analizar causalidad sanitaria más allá del evento inmediato (análisis post-ciclo)</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Biomasa muerta no explicada solo por patógenos</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">10</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Gestionar trade-offs entre continuidad productiva y riesgo sanitario</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Tratamientos aplicados para “salvar” el ciclo</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">11</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Diseñar indicadores operacionales alternativos al ICA para control temprano</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Dependencia exclusiva del ICA como señal tardía</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">12</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Comunicar y justificar decisiones sanitarias complejas a nivel de gobernanza</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Alta presión regulatoria y reputacional asociada a ICA</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="section" id="competencias">Competencias inferidas / antiparasitarios</h2>
+
+<p>La tabla de consumo de antiparasitarios no mide solo “presencia de Caligus” u otros ectoparásitos. Mide, de forma indirecta: nivel de desalineación entre biología, ambiente y operación, capacidad (o incapacidad) de control preventivo, grado de dependencia de intervenciones químicas bajo presión ambiental. A diferencia del ICA bacteriano, aquí el problema no es solo sanitario, sino ecológico-operacional. el antiparasitario aparece cuando el sistema ya perdió grados de libertad.</p>
+
+<div>
+<table style="width:100%; border-collapse:collapse; font-family:Consolas,'Courier New',monospace; font-size:11px; color:#000;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:center; position:sticky; top:0; background:#fff;">Nº</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:left; position:sticky; top:0; background:#fff;">Competencia inferida</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:center; position:sticky; top:0; background:#fff;">Dimensión AV predominante</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:left; position:sticky; top:0; background:#fff;">Qué tensión activa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">1</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Diseñar estrategias integradas de manejo parasitario no farmacológico</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR / ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Uso reiterado de tratamientos químicos</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">2</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Interpretar dinámicas espacio-temporales de infestación parasitaria</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Tratamientos reactivos y descoordinados</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">3</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Coordinar decisiones sanitarias entre centros propios y del entorno</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Reinfestación post-tratamiento</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">4</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Ajustar calendarios productivos en función de riesgo parasitario</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Intervenciones en momentos subóptimos</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">5</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Evaluar impacto operativo y biológico de tratamientos antiparasitarios</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Mortalidad o estrés post-tratamiento</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">6</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Integrar información ambiental (corrientes, temperatura, cargas) al manejo</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Estrategias homogéneas en ambientes distintos</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">7</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Implementar planes adaptativos de manejo parasitario por zona</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Repetición de esquemas estándar</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">8</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Diseñar sistemas de monitoreo temprano de presión parasitaria</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Detección tardía de infestaciones</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">9</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Gestionar trade-offs entre bienestar animal, productividad y control</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Uso intensivo de químicos bajo presión</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">10</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Analizar efectividad comparada de estrategias químicas y no químicas</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Dependencia prolongada de antiparasitarios</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">11</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Coordinar decisiones productivas con restricciones regulatorias dinámicas</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Ventanas limitadas de tratamiento</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">12</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Comunicar decisiones sanitarias complejas a nivel territorial y regulatorio</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Alta exposición pública y normativa</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="section" id="competencias">Competencias inferidas / peróxido de hidrógeno</h2>
+
+<p>Esta tabla de peróxido de hidrógeno aparece como una señal de crisis más que como una herramienta rutinaria. Las “tensiones” que lo activan (uso reiterado como última opción, aplicación bajo incertidumbre, deterioro post-tratamiento y riesgo operacional) empujan a que las competencias inferidas se concentren en dos frentes. Primero, SOP e ID dominan porque el problema no es solo “qué aplicar”, sino cómo decidir, coordinar y aprender cuando el sistema ya está bajo presión (protocolos seguros, documentación, contingencia, rediseño post-evento). Segundo, MAR y PROC aparecen cuando la tensión se traduce en impactos directos en el ciclo: estrés fisiológico, mortalidad, trade-offs producción–bienestar y efectos acumulados que se pagan más tarde en desempeño y cosecha. En síntesis, el peróxido funciona como un gatillo que revela la necesidad de capacidades más maduras de anticipación, gobernanza técnica y control del riesgo, porque su uso suele marcar el momento en que las alternativas intermedias ya fallaron o no existían.</p>
+
+<table style="width:100%; border-collapse:collapse; font-family:Consolas,'Courier New',monospace; font-size:11px; color:#000;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:center; position:sticky; top:0; background:#fff;">Nº</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:left; position:sticky; top:0; background:#fff;">Competencia inferida</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:center; position:sticky; top:0; background:#fff;">Dimensión AV predominante</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:left; position:sticky; top:0; background:#fff;">Qué tensión del peróxido la activa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">1</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Diseñar planes de contingencia sanitaria con alternativas al peróxido</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP / ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Uso reiterado como última opción</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">2</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Evaluar riesgo-beneficio biológico y productivo antes de tratamientos críticos</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Aplicaciones bajo alta incertidumbre</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">3</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Gestionar estrés fisiológico de peces durante intervenciones de alto impacto</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Mortalidad o deterioro post-tratamiento</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">4</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Implementar protocolos operativos seguros para tratamientos extremos</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Riesgo operacional elevado</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">5</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Anticipar escenarios de colapso sanitario a partir de señales tempranas</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP / ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Uso tardío del peróxido</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">6</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Integrar bienestar animal como criterio en decisiones sanitarias críticas</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Trade-offs producción–bienestar</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">7</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Analizar impactos acumulados de tratamientos agresivos en el ciclo completo</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">PROC</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Efectos posteriores en cosecha</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">8</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Diseñar estrategias de manejo que reduzcan la probabilidad de escenarios críticos</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Repetición de situaciones de crisis</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">9</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Coordinar equipos técnicos bajo presión operativa y regulatoria</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Decisiones tomadas en emergencia</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">10</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Comunicar y documentar decisiones críticas ante autoridades y stakeholders</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Alta exposición regulatoria</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">11</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Evaluar alternativas tecnológicas y operativas previas al uso de peróxido</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Falta de opciones intermedias</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">12</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Aprender sistemáticamente de eventos críticos para rediseñar el bioproceso</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Reaparición de crisis similares</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="section" id="competencias">Competencias inferidas desde mortalidad</h2>
+
+<p>Estas competencias no son sanitarias, o productivas y de un proceso aislado. Son competencias de integración y gobernanza del bioproceso. En esta tabla, cada competencia inferida representa una capacidad que el sistema productivo “se ve obligado” a desarrollar cuando la mortalidad deja de ser un evento aislado y pasa a comportarse como una señal persistente de fragilidad. La tensión activada funciona como disparador: por ejemplo, cuando la mortalidad se atribuye a múltiples factores (no solo un patógeno puntual), aparece con fuerza la dimensión ID, porque se necesita investigar y explicar causalidad compleja, conectar variables y evitar conclusiones rápidas que solo maquillan el problema. En cambio, cuando la tensión proviene de pérdidas asociadas a estrés acumulado o sobrecarga productiva, domina MAR, ya que el foco se desplaza hacia el manejo operativo del ciclo (densidades, cargas biológicas, intervenciones y márgenes de seguridad) para sostener resiliencia. Y cuando la tensión es una reacción tardía ante deterioro del ciclo o respuestas fragmentadas frente a crisis, se activa SOP, porque el problema ya no es que ocurrió, sino cómo se coordina la operación, se levantan alertas tempranas y se toman decisiones consistentes.</p>
+
+<table style="width:100%; border-collapse:collapse; font-family:Consolas,'Courier New',monospace; font-size:11px; color:#000;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:center; position:sticky; top:0; background:#fff;">Nº</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:left; position:sticky; top:0; background:#fff;">Competencia inferida</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:center; position:sticky; top:0; background:#fff;">Dimensión AV predominante</th>
+      <th style="border:1px solid #000; padding:4px 6px; text-align:left; position:sticky; top:0; background:#fff;">Qué tensión revela la mortalidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">1</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Evaluar integralmente causas de mortalidad más allá del evento inmediato</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Mortalidad atribuida a múltiples factores</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">2</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Integrar biología, ambiente y operación en decisiones de manejo</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR / SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Pérdidas asociadas a estrés acumulado</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">3</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Diseñar sistemas de alerta temprana para riesgos sistémicos</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Reacción tardía ante deterioro del ciclo</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">4</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Gestionar densidades y cargas biológicas con criterio de resiliencia</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Mortalidad por sobrecarga productiva</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">5</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Incorporar bienestar animal como variable estructural del sistema</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Mortalidad asociada a intervenciones</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">6</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Analizar impacto económico-productivo de la mortalidad en la cadena completa</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">PROC</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Pérdida de valor aguas abajo</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">7</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Coordinar respuestas inter-área frente a eventos críticos</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Acciones fragmentadas ante crisis</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">8</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Aprender sistemáticamente de eventos de mortalidad para rediseñar procesos</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Repetición de patrones de pérdida</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">9</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Diseñar ciclos productivos con márgenes de seguridad explícitos</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR / AD</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Fragilidad frente a perturbaciones normales</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">10</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Gestionar trade-offs entre productividad, sanidad y supervivencia</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">MAR</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Decisiones orientadas solo a continuidad</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">11</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Documentar y comunicar análisis de mortalidad a nivel organizacional</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">SOP</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Pérdida de aprendizaje organizacional</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">12</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Redefinir estándares productivos a partir de límites biológicos observados</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:center;">ID / PROC</td>
+      <td style="border:1px solid #000; padding:4px 6px; text-align:left;">Mortalidad como límite estructural</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="section" id="cuestionario">Metodología para un cuestionario </h2>
+
+<p>El método técnico para formular preguntas a informantes clave en salmonicultura, centrado en el perfil de un profesional acuícola (bioprocesos y operación productiva, no planta), parte de una regla simple: cada pregunta debe nacer de una tensión estructural observable en la composición AD–MAR–PROC–ID–SOP y luego aterrizar en una decisión concreta del ciclo productivo. En otras palabras, se entrevista para validar cómo una empresa gobierna el bioproceso cuando está obligada a elegir entre variables que compiten entre sí. </p>
+
+<p>Desde la metodología, la empresa no se describe por magnitudes absolutas sino por su posición relativa en el sistema, por eso las preguntas deben estar formuladas como relaciones: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿cómo equilibran X respecto de Y?” o “¿qué hacen cuando Y domina y X queda corto?</em>
+</div>
+</div>
+
+<p>Esto permite que el entrevistado responda con práctica real, criterios de decisión, señales tempranas, controles y protocolos, no con slogans corporativos. La clave es que el entrevistador siempre tenga a mano tres elementos: el triángulo (subcomposición), el indicador de fragilidad (como alerta estructural) y la competencia inferida (como traducción a capacidad laboral). Si se respeta esa tríada, cada respuesta deja huella directa sobre el currículo y sobre la factibilidad de formar el perfil.</p>
+
+<p>Para construir preguntas desde los triángulos, el procedimiento es mecánico y replicable. Primero seleccionar un triángulo relevante para acuicultura productiva, como AD–MAR–SOP o AD–MAR–ID. Luego identificar la zona dominante (por ex: MAR_vs_SOP) y se preguntas qué significa eso operacionalmente: si MAR domina y SOP queda bajo, lo esperado es alta exigencia de ejecución con soporte limitado, por tanto la entrevista debe entrar a gestión de riesgo, monitoreo, coordinación y cumplimiento. Después cruzar con fragilidad: si además la fragilidad es alta, la pregunta debe apuntar a cómo se evita el colapso y qué capacidades faltan en el personal medio-alto para anticipar y corregir. Finalmente se aterriza la pregunta como competencia verificable, por ex:  “capacidad de tomar decisiones basadas en indicadores tempranos de oxígeno, consumo y sanidad, antes de que la mortalidad suba”. </p>
+
+<p>Con esto, en lugar de preguntar </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Qué competencias se necesitan?, es mejor: ¿qué decisiones y controles requieren esas competencias?</em>
+</div>
+</div>
+
+<p>Por ex: si el triángulo AD–MAR–SOP sugiere tensión producción versus soporte, una pregunta válida y directa sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>Cuando la operación en mar se acelera por objetivos de biomasa, ¿qué controles o protocolos le impiden que el sistema se les vuelva reactivo en sanidad y mortalidad?</em>
+</div>
+</div>
+
+<p>Esa pregunta es simple, pero obliga a hablar de gobernanza real. Si el triángulo AD–MAR–ID marca tensión productiva versus aprendizaje, una pregunta coherente sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Qué parte de su operación en mar se rediseña cada ciclo y qué parte se repite igual aunque cambie el entorno?</em>
+</div>
+</div>
+
+<p>Esa pregunta detecta si ID existe como aprendizaje o solo como discurso. Si el balance producción–adaptación (ilr) te ubica en un extremo productivo, la pregunta correcta no es </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Usan innovación?, sino: ¿Qué evento biológico les obliga a frenar la producción y qué indicador les avisa antes de que sea tarde? </em>
+</div>
+</div>
+
+<p>La pregunta está diseñada para hacer emerger señal temprana, umbral y acción, que son exactamente los componentes técnicos que se pueden traducir en competencias para una programa de estudio.</p>
+
+<p>Con ese marco, aquí tienes ejemplos de preguntas que nacen de las variables y que un informante medio-alto del cultivo sí puede responder con evidencia práctica. Una primera pregunta, derivada de MAR dominante y fragilidad alta, sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Qué indicadores usan para decidir cambios de alimentación y densidad cuando el comportamiento del pez cambia, y qué riesgo consideran inaceptable aunque el crecimiento se vea bien?</em>
+</div>
+</div>
+
+<p>Esta pregunta conecta MAR con fragilidad y obliga a hablar de control fino del bioproceso. Una segunda pregunta, alineada con tensión AD–MAR, sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Qué condiciones mínimas debe cumplir un smolt para que se lo considere ‘transferible’ al mar sin aumentar el riesgo sanitario, y como se valida esa decisión?</em>
+</div>
+</div>
+
+<p>Esto aterriza AD como calidad biológica y muestra gobernanza técnica. Una tercera pregunta, útil cuando SOP aparece bajo respecto a MAR, sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Qué parte del control y trazabilidad todavía depende de experiencia personal y no de protocolo formal, y qué consecuencias trae cuando cambian jefaturas o equipos?</em>
+</div>
+</div>
+
+<p>Esto identifica dependencia de capital humano informal, típico en sistemas frágiles. Una cuarta pregunta, centrada en ID y aprendizaje, sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em> Cuando ocurre una desviación fuerte en mortalidad o tratamientos, ¿qué se cambia concretamente en el ciclo siguiente y cómo se asegura que ese cambio se aplique en todos los centros?</em>
+</div>
+</div>
+
+<p>Aquí ID deja de ser innovación abstracta y se vuelve rediseño replicable. Una quinta pregunta, derivada del triángulo MAR–PROC–SOP pero enfocada en mar (sin planta), sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Cómo coordinan la logística de cosecha sin que la presión por cumplir fechas deteriore bienestar, condición del pez y mortalidad pre-cosecha?  </em>
+</div>
+</div>
+
+<p>Esto evalúa coordinación operativa marino-logística como competencia profesional. Una sexta pregunta, conectada a evidencia tipo Sernapesca (tratamientos) sin pedir cifras sensibles, sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Qué prácticas de manejo en mar reducen la necesidad de tratamientos?</em>
+</div>
+</div>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Cuáles son las decisiones que más influyen en que un ciclo termine con baja intervención sanitaria?
+</em>
+</div>
+</div>
+
+<p>Esto hace emerger acciones preventivas, no excusas. Una séptima pregunta, orientada a sitios y concesiones con descansos, sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Cómo se decide cuándo un sitio está en condición de reiniciar ciclo después de descansos, y qué variables ambientales o sanitarias pesan más en esa decisión? </em>
+</div>
+</div>
+
+<p>Esto conecta territorio, regulación y control bioprocesal. Una octava pregunta, para detectar competencias de monitoreo y control temprano, sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Qué señal temprana consideran más peligrosa en mar: consumo irregular, oxígeno inestable, comportamiento superficial, lesión, o conteos parasitarios, y cuál es su protocolo de intervención antes de que se dispare la mortalidad?</em>
+</div>
+</div>
+
+<p>Es simple, pero te entrega jerarquía de señales y acciones. Una novena pregunta, centrada en SOP como gobernanza en terreno, sería: </p>
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>¿Qué tipo de decisiones críticas están autorizadas a tomar los jefes de centro sin escalar, y cuáles están exigidas por protocolo corporativo, y por qué? </em>
+</div>
+</div>
+
+<p>Esta pregunta revela dónde está el control real y cómo opera la estructura. Una décima pregunta, muy potente para factibilidad curricular, sería: </p>
+
+
+<div class="pregunta-container">
+<div class="pregunta">
+<em>Si usted recibiera un profesional acuícola recién egresado, ¿qué tres decisiones debería ser capaz de tomar en terreno durante su primer ciclo para que usted diga ‘sirve’, y qué evidencias debería manejar para sostenerlas?  </em>
+</div>
+</div>
+
+<p>Esto obliga a convertir competencias en desempeño evaluable, que es exactamente lo que necesita un diseño curricular serio.</p>
+
+<p>El lector desarolla sus propias preguntas siguiendo el mismo patrón: primero identifica qué dimensión domina y cuál queda segunda, porque ahí está la tensión operativa real; luego decide si el objetivo de la entrevista es conocer ejecución productiva, aprendizaje adaptativo o soporte/gobernanza; después escribe la pregunta como un dilema que fuerza a revelar criterios y umbrales, no como una pregunta abierta de opinión. Una pregunta bien formulada siempre contiene un “cuándo” o un “bajo qué condición” y termina en una acción: “¿qué hacen?” o “¿quién decide?”. Si quieres derivar preguntas desde competencias inferidas directamente, toma la competencia y conviértela en prueba: si la competencia dice “control preventivo sanitario”, la pregunta no es “¿les importa la sanidad?”, sino “¿qué control preventivo ejecutan semanalmente y qué ´´area les obliga a intervenir?”. Si la competencia dice “gestión de riesgo por sitio”, la pregunta no es “¿cómo de gestiona el riesgo?”, sino “¿qué variable del sitio pesa más para decidir densidad, alimentación y logística y cómo lo justifican?”. Así la entrevista deja de ser conversación y se vuelve instrumento técnico de validación del perfil profesional acuícola, exactamente en el punto donde la metodología es fuerte: componer estructura de agregación de valor con exigencias reales del bioproceso, sin confundirlo con el mundo industrial de procesamiento.</p>
+
+<h1 class="section" id="anexos">Anexos
+</h1>
+
+<h2 class="section" id="anexos">Informes Sectoriales SUBPESCA</h2>
+<p class="ui">
+  Tablas incorporadas directamente desde <a href="https://www.subpesca.cl/portal/publicaciones/Publicaciones/Informes/Informes-sectoriales/">Informes sectoriales acuicultura / salmon </a>
+</p>
+
+<div class="tablebox" id="anexo-tabla-1">
+  <div class="fig-head">
+    <div class="label ui">Anexo</div>
+    <div class="note ui">Indice_consumo_antimicrobiano_ICA_2024.xlsx — Hoja1</div>
+  </div>
+  <div class="table-inline">
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Holding</th>
+      <th>N° de ciclos cerrados</th>
+      <th>Cantidad Antimicrobianos (kg)</th>
+      <th>Biomasa Muerta (t)</th>
+      <th>Biomasa Cosechada (t)</th>
+      <th>Indice Consumo Antimicrobiano (ICA) (g/t)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>EMPRESAS AQUACHILE</td>
+      <td>90</td>
+      <td>40756.41</td>
+      <td>10775.46</td>
+      <td>253877.34</td>
+      <td>154.00</td>
+    </tr>
+    <tr>
+      <td>SALMONES DE CHILE</td>
+      <td>7</td>
+      <td>6119.84</td>
+      <td>1663.27</td>
+      <td>15967.73</td>
+      <td>347.11</td>
+    </tr>
+    <tr>
+      <td>AUSTRALIS MAR</td>
+      <td>16</td>
+      <td>7707.04</td>
+      <td>2171.08</td>
+      <td>52336.02</td>
+      <td>141.40</td>
+    </tr>
+    <tr>
+      <td>BLUMAR</td>
+      <td>12</td>
+      <td>10423.50</td>
+      <td>5319.00</td>
+      <td>47188.74</td>
+      <td>198.51</td>
+    </tr>
+    <tr>
+      <td>CALETA BAY</td>
+      <td>9</td>
+      <td>459.03</td>
+      <td>2436.77</td>
+      <td>25193.76</td>
+      <td>16.61</td>
+    </tr>
+    <tr>
+      <td>CERMAQ CHILE</td>
+      <td>21</td>
+      <td>44335.61</td>
+      <td>5877.22</td>
+      <td>90651.09</td>
+      <td>459.30</td>
+    </tr>
+    <tr>
+      <td>COOKE AQUACULTURE CHILE</td>
+      <td>8</td>
+      <td>1550.32</td>
+      <td>1094.89</td>
+      <td>16543.17</td>
+      <td>87.90</td>
+    </tr>
+    <tr>
+      <td>EMPRESAS YADRAN</td>
+      <td>9</td>
+      <td>18061.42</td>
+      <td>1970.39</td>
+      <td>29823.22</td>
+      <td>568.08</td>
+    </tr>
+    <tr>
+      <td>INVERMAR</td>
+      <td>7</td>
+      <td>25311.52</td>
+      <td>1446.45</td>
+      <td>33045.62</td>
+      <td>733.84</td>
+    </tr>
+    <tr>
+      <td>MARINE FARM</td>
+      <td>12</td>
+      <td>16253.83</td>
+      <td>1186.98</td>
+      <td>41323.96</td>
+      <td>382.34</td>
+    </tr>
+    <tr>
+      <td>MOWI CHILE</td>
+      <td>18</td>
+      <td>40656.68</td>
+      <td>6101.13</td>
+      <td>86616.73</td>
+      <td>438.50</td>
+    </tr>
+    <tr>
+      <td>MULTI-X</td>
+      <td>22</td>
+      <td>56958.55</td>
+      <td>7141.12</td>
+      <td>87879.00</td>
+      <td>599.44</td>
+    </tr>
+    <tr>
+      <td>NOVA AUSTRAL</td>
+      <td>3</td>
+      <td>0.00</td>
+      <td>726.89</td>
+      <td>5800.86</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>PRODUCTOS DEL MAR VENTISQUEROS</td>
+      <td>13</td>
+      <td>8784.60</td>
+      <td>3357.67</td>
+      <td>43586.42</td>
+      <td>187.13</td>
+    </tr>
+    <tr>
+      <td>SALMONES ANTÁRTICA</td>
+      <td>11</td>
+      <td>13901.12</td>
+      <td>3185.88</td>
+      <td>35633.86</td>
+      <td>358.09</td>
+    </tr>
+    <tr>
+      <td>SALMONES AUSTRAL</td>
+      <td>13</td>
+      <td>18229.04</td>
+      <td>3008.79</td>
+      <td>64382.95</td>
+      <td>270.49</td>
+    </tr>
+    <tr>
+      <td>SALMONES AYSÉN</td>
+      <td>18</td>
+      <td>2656.66</td>
+      <td>2173.01</td>
+      <td>63999.75</td>
+      <td>40.15</td>
+    </tr>
+    <tr>
+      <td>SALMONES CAMANCHACA</td>
+      <td>12</td>
+      <td>24095.21</td>
+      <td>1578.60</td>
+      <td>57163.27</td>
+      <td>410.19</td>
+    </tr>
+    <tr>
+      <td>TOTALES</td>
+      <td>301</td>
+      <td>336260.39</td>
+      <td>61214.59</td>
+      <td>1051013.47</td>
+      <td>302.33</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+
+
+<div class="tablebox" id="anexo-tabla-2">
+  <div class="fig-head">
+    <div class="label ui">Anexo</div>
+    <div class="note ui">Indice_Consumo_Antiparasitarios_2024.xlsx — Hoja1</div>
+  </div>
+  <div class="table-inline">
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Holding</th>
+      <th>N° de ciclos</th>
+      <th>Cantidad Antiparasitarios (kg)</th>
+      <th>Biomasa Muerta (t)</th>
+      <th>Biomasa Cosechada (t)</th>
+      <th>Indice consumo antiparasitario_IC ATP (g/t)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>EMPRESAS AQUACHILE</td>
+      <td>90</td>
+      <td>1413.49</td>
+      <td>10775.46</td>
+      <td>253877.34</td>
+      <td>5.34</td>
+    </tr>
+    <tr>
+      <td>SALMONES DE CHILE</td>
+      <td>7</td>
+      <td>54.70</td>
+      <td>1663.27</td>
+      <td>15967.73</td>
+      <td>3.10</td>
+    </tr>
+    <tr>
+      <td>AUSTRALIS MAR</td>
+      <td>16</td>
+      <td>84.48</td>
+      <td>2171.08</td>
+      <td>52336.02</td>
+      <td>1.55</td>
+    </tr>
+    <tr>
+      <td>BLUMAR</td>
+      <td>12</td>
+      <td>190.79</td>
+      <td>5319.00</td>
+      <td>47188.74</td>
+      <td>3.63</td>
+    </tr>
+    <tr>
+      <td>CALETA BAY</td>
+      <td>9</td>
+      <td>3.06</td>
+      <td>2436.77</td>
+      <td>25193.76</td>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <td>CERMAQ CHILE</td>
+      <td>21</td>
+      <td>382.12</td>
+      <td>5877.22</td>
+      <td>90651.09</td>
+      <td>3.96</td>
+    </tr>
+    <tr>
+      <td>COOKE AQUACULTURE CHILE</td>
+      <td>8</td>
+      <td>1.00</td>
+      <td>1094.89</td>
+      <td>16543.17</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>EMPRESAS YADRAN</td>
+      <td>9</td>
+      <td>672.77</td>
+      <td>1970.39</td>
+      <td>29823.22</td>
+      <td>21.16</td>
+    </tr>
+    <tr>
+      <td>INVERMAR</td>
+      <td>7</td>
+      <td>153.59</td>
+      <td>1446.45</td>
+      <td>33045.62</td>
+      <td>4.45</td>
+    </tr>
+    <tr>
+      <td>MARINE FARM</td>
+      <td>12</td>
+      <td>139.14</td>
+      <td>1186.98</td>
+      <td>41323.96</td>
+      <td>3.27</td>
+    </tr>
+    <tr>
+      <td>MOWI CHILE</td>
+      <td>18</td>
+      <td>364.29</td>
+      <td>6101.13</td>
+      <td>86616.73</td>
+      <td>3.93</td>
+    </tr>
+    <tr>
+      <td>MULTI-X</td>
+      <td>22</td>
+      <td>511.78</td>
+      <td>7141.12</td>
+      <td>87879.00</td>
+      <td>5.39</td>
+    </tr>
+    <tr>
+      <td>NOVA AUSTRAL</td>
+      <td>3</td>
+      <td>39.64</td>
+      <td>726.89</td>
+      <td>5800.86</td>
+      <td>6.07</td>
+    </tr>
+    <tr>
+      <td>PRODUCTOS DEL MAR VENTISQUEROS</td>
+      <td>13</td>
+      <td>158.34</td>
+      <td>3357.67</td>
+      <td>43586.42</td>
+      <td>3.37</td>
+    </tr>
+    <tr>
+      <td>SALMONES ANTARTICA</td>
+      <td>11</td>
+      <td>101.54</td>
+      <td>3185.88</td>
+      <td>35633.86</td>
+      <td>2.62</td>
+    </tr>
+    <tr>
+      <td>SALMONES AUSTRAL</td>
+      <td>13</td>
+      <td>162.60</td>
+      <td>3008.79</td>
+      <td>64382.95</td>
+      <td>2.41</td>
+    </tr>
+    <tr>
+      <td>SALMONES AYSEN</td>
+      <td>18</td>
+      <td>0.00</td>
+      <td>2173.01</td>
+      <td>63999.75</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>SALMONES CAMANCHACA</td>
+      <td>12</td>
+      <td>336.16</td>
+      <td>1578.60</td>
+      <td>57163.27</td>
+      <td>5.72</td>
+    </tr>
+    <tr>
+      <td>TOTALES</td>
+      <td>301</td>
+      <td>4769.49</td>
+      <td>61214.59</td>
+      <td>1051013.47</td>
+      <td>4.29</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+
+
+<div class="tablebox" id="anexo-tabla-3">
+  <div class="fig-head">
+    <div class="label ui">Anexo</div>
+    <div class="note ui">Índice_Consumo_Peróxido_Hidrógeno_2024..xlsx — Hoja1</div>
+  </div>
+  <div class="table-inline">
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Holding</th>
+      <th>N° de ciclos</th>
+      <th>Cantidad Peróxido de Hidrógeno (kg)</th>
+      <th>Biomasa Muerta (t)</th>
+      <th>Biomasa Cosechada (t)</th>
+      <th>IC P (g/t)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>EMPRESAS AQUACHILE</td>
+      <td>90</td>
+      <td>2906184.00</td>
+      <td>10775.46</td>
+      <td>253877.34</td>
+      <td>10981.12</td>
+    </tr>
+    <tr>
+      <td>SALMONES DE CHILE</td>
+      <td>7</td>
+      <td>11520.00</td>
+      <td>1663.27</td>
+      <td>15967.73</td>
+      <td>653.39</td>
+    </tr>
+    <tr>
+      <td>AUSTRALIS MAR</td>
+      <td>16</td>
+      <td>628770.60</td>
+      <td>2171.08</td>
+      <td>52336.02</td>
+      <td>11535.57</td>
+    </tr>
+    <tr>
+      <td>BLUMAR</td>
+      <td>12</td>
+      <td>951695.00</td>
+      <td>5319.00</td>
+      <td>47188.74</td>
+      <td>18124.85</td>
+    </tr>
+    <tr>
+      <td>CALETA BAY</td>
+      <td>9</td>
+      <td>0.00</td>
+      <td>2436.77</td>
+      <td>25193.76</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>CERMAQ CHILE</td>
+      <td>21</td>
+      <td>2363665.25</td>
+      <td>5877.22</td>
+      <td>90651.09</td>
+      <td>24486.76</td>
+    </tr>
+    <tr>
+      <td>COOKE AQUACULTURE CHILE</td>
+      <td>8</td>
+      <td>0.00</td>
+      <td>1094.89</td>
+      <td>16543.17</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>EMPRESAS YADRAN</td>
+      <td>9</td>
+      <td>569150.00</td>
+      <td>1970.39</td>
+      <td>29823.22</td>
+      <td>17901.40</td>
+    </tr>
+    <tr>
+      <td>INVERMAR</td>
+      <td>7</td>
+      <td>879289.65</td>
+      <td>1446.45</td>
+      <td>33045.62</td>
+      <td>25492.52</td>
+    </tr>
+    <tr>
+      <td>MARINE FARM</td>
+      <td>12</td>
+      <td>0.00</td>
+      <td>1186.98</td>
+      <td>41323.96</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>MOWI CHILE</td>
+      <td>18</td>
+      <td>310944.00</td>
+      <td>6101.13</td>
+      <td>86616.73</td>
+      <td>3353.66</td>
+    </tr>
+    <tr>
+      <td>MULTI-X</td>
+      <td>22</td>
+      <td>3149184.00</td>
+      <td>7141.12</td>
+      <td>87879.00</td>
+      <td>33142.29</td>
+    </tr>
+    <tr>
+      <td>NOVA AUSTRAL</td>
+      <td>3</td>
+      <td>0.00</td>
+      <td>726.89</td>
+      <td>5800.86</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>PRODUCTOS DEL MAR VENTISQUEROS</td>
+      <td>13</td>
+      <td>0.00</td>
+      <td>3357.67</td>
+      <td>43586.42</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>SALMONES ANTARTICA</td>
+      <td>11</td>
+      <td>0.00</td>
+      <td>3185.88</td>
+      <td>35633.86</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>SALMONES AUSTRAL</td>
+      <td>13</td>
+      <td>0.00</td>
+      <td>3008.79</td>
+      <td>64382.95</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>SALMONES AYSEN</td>
+      <td>18</td>
+      <td>0.00</td>
+      <td>2173.01</td>
+      <td>63999.75</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>SALMONES CAMANCHACA</td>
+      <td>12</td>
+      <td>342085.00</td>
+      <td>1578.60</td>
+      <td>57163.27</td>
+      <td>5823.53</td>
+    </tr>
+    <tr>
+      <td>TOTALES</td>
+      <td>301</td>
+      <td>12112487.50</td>
+      <td>61214.59</td>
+      <td>1051013.47</td>
+      <td>10890.29</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+
+
+<div class="tablebox" id="anexo-tabla-4">
+  <div class="fig-head">
+    <div class="label ui">Anexo</div>
+    <div class="note ui">Numero_peces_muertos.xlsx — Hoja1</div>
+  </div>
+  <div class="table-inline">
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Holding</th>
+      <th>N° Mortalidad</th>
+      <th>% Mortalidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NOVA AUSTRAL S.A.</td>
+      <td>352441</td>
+      <td>0.192</td>
+    </tr>
+    <tr>
+      <td>SALMONES DE CHILE ALIMENTOS S.A</td>
+      <td>864491</td>
+      <td>0.164</td>
+    </tr>
+    <tr>
+      <td>BLUMAR S.A.</td>
+      <td>1701753</td>
+      <td>0.146</td>
+    </tr>
+    <tr>
+      <td>MULTIEXPORT FOODS S.A.</td>
+      <td>2501835</td>
+      <td>0.125</td>
+    </tr>
+    <tr>
+      <td>CALETA BAY S.A.</td>
+      <td>1094224</td>
+      <td>0.121</td>
+    </tr>
+    <tr>
+      <td>COOKE AQUACULTURE CHILE S.A.</td>
+      <td>443962</td>
+      <td>0.120</td>
+    </tr>
+    <tr>
+      <td>SALMONES ANTARTICA S.A</td>
+      <td>1351863</td>
+      <td>0.119</td>
+    </tr>
+    <tr>
+      <td>EMPRESAS YADRAN.</td>
+      <td>897329</td>
+      <td>0.113</td>
+    </tr>
+    <tr>
+      <td>AUSTRALIS MAR S.A</td>
+      <td>1367957</td>
+      <td>0.107</td>
+    </tr>
+    <tr>
+      <td>CERMAQ CHILE S.A</td>
+      <td>2145979</td>
+      <td>0.106</td>
+    </tr>
+    <tr>
+      <td>MOWI CHILE S.A.</td>
+      <td>2063199</td>
+      <td>0.106</td>
+    </tr>
+    <tr>
+      <td>PRODUCTOS DEL MAR VENTISQUEROS S.A.</td>
+      <td>1157280</td>
+      <td>0.102</td>
+    </tr>
+    <tr>
+      <td>EMPRESAS AQUACHILE S.A.</td>
+      <td>5167555</td>
+      <td>0.092</td>
+    </tr>
+    <tr>
+      <td>SALMONES AUSTRAL S.A.</td>
+      <td>1125284</td>
+      <td>0.078</td>
+    </tr>
+    <tr>
+      <td>INVERMAR S.A</td>
+      <td>606559</td>
+      <td>0.077</td>
+    </tr>
+    <tr>
+      <td>SALMONES AYSEN S.A.</td>
+      <td>1185266</td>
+      <td>0.067</td>
+    </tr>
+    <tr>
+      <td>SALMONES CAMANCHACA S.A.</td>
+      <td>705635</td>
+      <td>0.056</td>
+    </tr>
+    <tr>
+      <td>MARINE FARM</td>
+      <td>520729</td>
+      <td>0.052</td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+</div>
+
+<section id="figuras-salmonchile" class="anexo-figuras">
+  <h2 class="section">Anexo — Figuras SalmonChile (consistencia con tablas Excel)</h2>
+
+  <p class="ui" style="max-width: 1000px; line-height: 1.45;">
+    Las siguientes figuras provienen del sitio de <b>SalmonChile</b> y se incorporan como referencia visual para contrastar tendencias con las tablas extraídas desde los archivos Excel anexos. La intención no es “duplicar” los datos, sino <b>verificar consistencia</b>: si las tablas muestran una tendencia descendente o al alza (por ex: mortalidad, carga parasitaria, consumo de antiparasitarios o ICA), estas gráficas deberían reflejar el mismo comportamiento agregado por año. En otras palabras: <b>las tablas permiten trazabilidad numérica</b> y las figuras entregan <b>validación narrativa</b> del patrón temporal reportado desde las Empresas.
+  </p>
+
+  <div class="grid-2x2">
+    <figure class="fig-card">
+      <img src="mortalidad.png" alt="% de mortalidad (SalmonChile)">
+      <figcaption class="ui">
+        <b>% de mortalidad</b> (SalmonChile). Serie anual 2013–2024.
+      </figcaption>
+    </figure>
+
+    <figure class="fig-card">
+      <img src="Tasa antiparasitario.png" alt="Tasa antiparasitarios (SalmonChile)">
+      <figcaption class="ui">
+        <b>Tasa antiparasitarios</b> (principio activo baño/biomasa LWE). 2013–2024.
+      </figcaption>
+    </figure>
+
+    <figure class="fig-card">
+      <img src="Caligus.png" alt="Promedio Caligus ciclo cerrado (SalmonChile)">
+      <figcaption class="ui">
+        <b>Promedio Caligus</b> (ciclo cerrado). 2013–2024.
+      </figcaption>
+    </figure>
+
+    <figure class="fig-card">
+      <img src="ICA biomasa.png" alt="ICA por biomasa (SalmonChile)">
+      <figcaption class="ui">
+        <b>ICA (gr/biomasa LWE)</b>. 2013–2024.
+      </figcaption>
+    </figure>
+  </div>
+
+  <p class="ui" style="opacity:0.75; margin-top:10px;">
+    Fuente: SalmonChile (material gráfico público). Sitio oficial: <b>https://www.salmonchile.cl/</b>
+  </p>
+
+<h2 class="section" id="metodo">Bibliografía</h2>
+
+  <ul>
+    <li>
+      Aitchison, J. (1986). <i>The Statistical Analysis of Compositional Data</i>. Chapman &amp; Hall.
+      (Reimpresión: Blackburn Press, 2003).
+      <a href="https://books.google.com/books/about/The_Statistical_Analysis_of_Compositiona.html?id=b_2YQgAACAAJ">Referencia</a>.
+      <!-- Fuente: Google Books -->
+    </li>
+    <li>
+      Aitchison, J. (1982). Statistical Analysis of Compositional Data.
+      <i>Journal of the Royal Statistical Society: Series B (Methodological)</i>, 44(2), 139–177.
+      <a href="https://academic.oup.com/jrsssb/article/44/2/139/7027742">Referencia</a>.
+      <!-- Fuente: OUP -->
+    </li>
+    <li>
+      Aitchison, J. (1990). Relative variation diagrams for describing patterns of compositional variability.
+      <i>Mathematical Geology</i>.
+      <a href="https://link.springer.com/article/10.1007/BF00890330">Referencia</a>.
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      SalmonChile A.G. (2024). <i>X Informe de Sustentabilidad 2024</i>.
+      <a href="https://www.salmonchile.cl/descargas/X_Informe_Sustentabilidad_SalmonChile_2024.pdf">PDF</a>.
+      <!-- Fuente: SalmonChile -->
+    </li>
+    <li>
+      SalmonChile A.G. (2025). SalmonChile presenta su Décimo Informe de Sustentabilidad (resultados operación 2024).
+      <a href="https://www.salmonchile.cl/noticias/salmonchile-presenta-su-decimo-informe-de-sustentabilidad-con-cifras-record-de-inversion-en-innovacion-y-exportaciones/">Nota</a>.
+      <!-- Fuente: SalmonChile -->
+    </li>
+    <li>
+      Subsecretaría de Pesca y Acuicultura (SUBPESCA). (2025). <i>Informe Sectorial de Pesca y Acuicultura 2025</i>.
+      <a href="https://www.subpesca.cl/portal/618/articles-126267_documento.pdf">PDF</a>.
+      <!-- Fuente: SUBPESCA -->
+    </li>
+    <li>
+      Consejo del Salmón. (2024). <i>Reporte/Informe de Sostenibilidad 2024</i> (difusión pública).
+      <a href="https://es.aquafeed.com/regiones/latin-america/consejo-del-salmon-presenta-su-informe-de-sostenibilidad-2024/">Nota</a>.
+    </li>
+    <li>
+      Ortiz-Severín, J., Hodar, C., Stuardo, C., Aguado-Norese, C., Maza, F., González, M., &amp; Cambiazo, V. (2024).
+      Impact of salmon farming in the antibiotic resistance and structure of marine bacterial communities from surface seawater of a northern Patagonian area of Chile.
+      <i>Biological Research</i>, 57:84.
+      <a href="https://link.springer.com/article/10.1186/s40659-024-00556-4">Artículo</a>.
+      <!-- Fuente: Springer (Open Access) -->
+    </li>
+    <li>
+      (2025). Insights and Lessons from Chilean Salmon Aquaculture on Antimicrobial Use.
+      <i>Antibiotics</i> (MDPI).
+      <a href="https://www.mdpi.com/2079-6382/14/12/1177">Artículo</a>.
+      <!-- Fuente: MDPI -->
+    </li>
+    <li>
+      (2024). Quantifying antimicrobial consumption in the Chilean salmon industry (indicadores estandarizados de AMU).
+      <i>Preventive Veterinary Medicine</i> (ScienceDirect).
+      <a href="https://www.sciencedirect.com/science/article/abs/pii/S0167587724002174">Referencia</a>.
+      <!-- Fuente: ScienceDirect -->
+    </li>
+  </ul>
+  <ul>
+    <li>
+      Fondo de Investigación Pesquera y Acuicultura (FIPA) / SUBPESCA. (2025, mayo).
+      <i>Informe final FIPA N°2023-11: “Análisis del estado del conocimiento … sobre modelos … para la evaluación del estado ambiental de los centros … salmonicultura … y medidas para disminuir/eliminar sedimentación y acumulación de materia orgánica en los fondos”</i>.
+      <a href="https://www.subpesca.cl/fipa/613/articles-117624_informe_final.pdf">PDF</a>.
+    </li>
+    <li>
+      Servicio Nacional de Pesca y Acuicultura (SERNAPESCA). (2025).
+      <i>Informe Situación Sanitaria Salmonicultura — Año 2024</i>.
+      <a href="https://www.sernapesca.cl/app/uploads/2025/07/Informe-Situacion-Sanitaria-Salmonicultura-Ano-2024V-V2.pdf">PDF</a>.
+      <!-- Fuente: Sernapesca (Resultados de Gestión / Sanitarios) -->
+    </li>
+    <li>
+      SERNAPESCA. (2025).
+      <i>Informe Uso de Antimicrobianos y Antiparasitarios — Año 2024</i>.
+      <a href="https://www.sernapesca.cl/app/uploads/2025/07/Informe-Uso-Antimicrobianos-y-Antiparasitarios-Ano-2024.pdf">PDF</a>.
+      <!-- Fuente: Sernapesca (Resultados de Gestión / Sanitarios) -->
+    </li>
+    <li>
+      SERNAPESCA. (2024).
+      <i>Informe Sanitario — Primer semestre 2024</i>.
+      <a href="https://www.sernapesca.cl/app/uploads/2025/03/Informe-Sanitario-PRIMER-SEMESTRE-2024.pdf">PDF</a>.
+      <!-- Fuente: Sernapesca -->
+    </li>
+    <li>
+      SERNAPESCA. (2025-07-17). Sernapesca presenta informes anuales de estado sanitario y uso de fármacos en la acuicultura (año 2024).
+      <a href="https://www.sernapesca.cl/noticias/sernapesca-presenta-informes-anuales-de-estado-sanitario-y-uso-de-farmacos-en-la-acuicultura/"></a>.
+    </li>
+  </ul>
+
+  <hr />
+
+
+
+</section>
+
+</article>
+
+
+      <aside class="side">
+        <div class="sidebox">
+          <h3 class="ui">Contenido</h3>
+          <ul class="toc">
+            <li><a href="#resumen">Pregunta</a></li>
+            <li><a href="#metodo">Método</a></li>
+            <li><a href="#inferir">Inferir Agregación de Valor</a></li>
+            <li><a href="#dimensión">Proporcionar</a></li>
+            <li><a href="#componer">Componer</a></li>
+            <li><a href="#competencias">Inferir competencias</a></li>
+            <li><a href="#anexos">Anexos</a></li>
+          </ul>
+          <p class="ui" style="margin-top:1rem; font-size:0.88rem; color:#6b7280;">
+            <strong>Nota transversalis</strong>: Los datos composicionales (Compositional Data, CoDa) son variables que describen partes de un todo (v.gr: proporciones, porcentajes, ppm) cuya característica clave es que siempre suman una constante (como 1 o 100%). El punto crítico (según John Aitchison) es que estos datos no viven en el espacio “normal” de la estadística clásica, porque la restricción de suma constante obliga a que si una parte sube, otra necesariamente baje, generando correlaciones espurias y conclusiones engañosas. Para resolverlo, CoDa trata las composiciones en el Simplex (su espacio geométrico natural) y trabaja la información de forma relativa, usando transformaciones log-ratio como: alr (Additive Log-Ratio). clr (Centered Log-Ratio). Así, el análisis se basa en relaciones entre componentes (lo único que realmente tiene sentido en composiciones) y permite aplicar métodos estadísticos estándar en un espacio adecuado. Gracias a esto avanzamos desde la agregación a la composición del valor. 
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
